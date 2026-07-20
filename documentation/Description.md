@@ -2,158 +2,174 @@
 
 ## Source material
 
-This project implements the formal model described in
-[`references/Deontic Logic for Agent Permissions - A Formal Framework for AI Agent Governance.pdf`](references/Deontic%20Logic%20for%20Agent%20Permissions%20-%20A%20Formal%20Framework%20for%20AI%20Agent%20Governance.pdf),
-an article proposing a Hohfeldian + deontic-logic foundation for AI agent authorization (written as a
-critique of ad-hoc, path-based MCP authorization). A related project, cited by the user as precedent for
-tooling choice, is tracked in [`references/External-Links.md`](references/External-Links.md).
+- [`references/Deontic Logic for Agent Permissions - A Formal Framework for AI Agent Governance.pdf`](references/Deontic%20Logic%20for%20Agent%20Permissions%20-%20A%20Formal%20Framework%20for%20AI%20Agent%20Governance.pdf)
+  — the original motivating essay: Hohfeldian + deontic-logic foundation for AI agent authorization,
+  written as a critique of ad-hoc, path-based MCP authorization. Informal in places (states an
+  algorithm and a conflict-resolution rule without formal definition).
+- [`references/query-2026-07-21-deontic-reasoner-implementation-spec.md`](references/query-2026-07-21-deontic-reasoner-implementation-spec.md)
+  — **the primary architectural blueprint for this iteration.** A formal design spec that takes the
+  PDF's model as its target problem and resolves every place the PDF was informal (conflict resolution,
+  closure, contrary-to-duty obligations, the stdlib-vs-SymPy question) into a concrete, implementable
+  design: data model, forward-chaining engine, hand-rolled SAT-based conflict detection, pluggable
+  combining algorithms, delegation-chain validation, draft requirements (FR/NFR), a risk table, and nine
+  worked test scenarios. Where this document and the PDF disagree on specifics, this one wins — it was
+  written specifically to resolve the PDF's ambiguities under this project's actual constraints (Python
+  3.14, stdlib-first, SymPy-as-fallback, dataclasses/JSON, forward chaining).
+- [`references/External-Links.md`](references/External-Links.md) — external precedent (the SymPy-based
+  deontic solver referenced when discussing tooling choice).
 
 ## What is being built (this iteration)
 
 **The semantic reasoner only** — the core logical engine that decides permission questions. Explicitly
-**not** in scope for this iteration: the MCP server, the textual permission DSL/parser, the governance
-dashboard, and automated recourse/escalation policy (these are later phases of the source article, and
-will be picked up as future iterations once the reasoner itself exists and is trustworthy).
+**not** in scope for this iteration: the MCP server, a textual permission DSL/parser (rules are authored
+directly as Python `Rule` objects — the implementation spec explicitly leaves a declarative surface
+syntax as a later, optional addition, §15), the governance dashboard, and automated recourse/escalation
+policy. These remain later-iteration work, to be picked up once the reasoner itself exists and is
+trustworthy.
 
-Target: Python 3.14, standard library only if at all possible. SymPy (`sympy.logic`) is pre-approved as
-a fallback dependency — but only if a real need for general propositional satisfiability/boolean
-simplification emerges that the stdlib can't reasonably cover; it is not assumed necessary up front (see
-*Open design question* below).
+Target: Python 3.14, standard library only. SymPy (`sympy.logic`) is the one pre-approved fallback
+dependency, reserved for exactly one escape hatch — see *Resolved: stdlib vs. SymPy* below.
 
 ## Theoretical foundation
 
-### Hohfeldian legal relations
+### Deontic operators, and a deliberate departure from Standard Deontic Logic
 
-Wesley Hohfeld's decomposition of "rights" into eight fundamental legal relations, in four correlative
-pairs, each with a jural opposite:
+`O` (obligatory) is primitive; permission and prohibition are defined from it: `P(p) ≡ ¬O(¬p)`,
+`F(p) ≡ O(¬p) ≡ ¬P(p)`. Unlike textbook Standard Deontic Logic (SDL), this reasoner does **not** globally
+enforce SDL's "obligations cannot conflict" axiom — two delegators can independently impose genuinely
+incompatible duties, and a logic that rules this out by fiat can't represent that situation, only crash
+on it. Conflicts are instead **detected** (via a consistency check) and **resolved** by an explicit,
+configurable policy — see *Architecture* below.
 
-| Holder | Correlative | Opposite (of holder) |
-|---|---|---|
-| Right (claim-right) | Duty | No-Right |
-| Privilege (liberty) | No-Right | Duty |
-| Power | Liability | Disability |
-| Immunity | Disability | Power |
+### Hohfeldian relations — the multi-agent layer
 
-- **Right–Duty**: if A has a right that B perform X, B has a correlative duty to perform X.
-- **Privilege–NoRight**: if A has a privilege to do X, no one has a right that A not do X — permission
-  without obligation; A *may* act but need not.
-- **Power–Liability**: if A has power to change B's normative position (grant/revoke/modify), B is liable
-  to that change. This is the delegation/authorization/governance relation.
-- **Immunity–Disability**: the inverse of power — if A has immunity from B's attempted changes, B is
-  disabled from affecting A's position.
+Plain `O`/`P`/`F` is agent-neutral: it can't say *who* a duty is owed to, or *who* can change *whose*
+normative position. Every norm is one of four Hohfeldian incidents:
 
-### Deontic modal operators
+| Relation | Holder can... | Correlative (counterparty has) | Opposite (holder lacks) |
+|---|---|---|---|
+| **Privilege** | do X, no duty not to | no-right | duty |
+| **Right** (claim) | demand X of someone | duty (on someone) | no-claim |
+| **Power** | change a normative position (grant/revoke) | liability | disability |
+| **Immunity** | be secure against a position-change | disability (in someone) | liability |
 
-Standard deontic logic, three operators over a proposition `p`:
+`Privilege` corresponds to plain `P`; `Right` corresponds to a *directed* `O` (owed by a specific
+counterparty, to a specific holder) — directedness plain SDL cannot express. `Power` and `Immunity` have
+no SDL analogue at all: they concern **norm-changing acts**, and are modeled as ordinary derivation rules
+whose consequent is itself a new norm (a power exercised is a rule firing that asserts a fact), not as a
+deontic operator over propositions.
 
-- `O(p)` — it is obligatory that p
-- `P(p)` — it is permitted that p
-- `F(p)` — it is forbidden that p
+### Conditional (dyadic) obligation — why delegation needs it
 
-Inter-definitions the reasoner must respect as identities, not independent facts:
-
-- `P(p) ≡ ¬O(¬p)` (permitted iff not obligated-not-to)
-- `F(p) ≡ O(¬p) ≡ ¬P(p)` (forbidden iff not permitted)
-
-### The permission calculus
-
-Core domain types:
-
-- `Agent`, `Resource` — identifiers
-- `Action` — one of `read | write | execute | delegate | revoke`
-- `Scope` — `temporal_bound × resource_bound × context_bound`
-- `Permission` — a structured tuple `(agent, action, resource, scope, provenance)`, not a bare boolean.
-  Every permission carries:
-  1. **Provenance** — who granted it, under what authority.
-  2. **Scope** — temporal bounds (`valid_from`/`valid_until`), execution contexts, and conditions.
-  3. **Delegation info** — whether it's delegable, and under what constraints (e.g. max delegation
-     depth, approval thresholds).
-
-Each permission is tagged with its Hohfeldian **relation type** (`privilege | right | power | immunity`),
-which determines what correlative obligation/liability/disability it generates on other agents.
+A norm that only fires given some other condition is written `O(φ | ψ)` as a **primitive dyadic
+operator** — not `ψ → O(φ)`, which is known to misbehave (the classic "ashtray"/"gentle murder"
+problems). This matters directly for delegation: "if B violates the terms, A ought to revoke B's access"
+is a **contrary-to-duty obligation**, structurally identical to Chisholm's 1963 paradox. Representing it
+dyadically (`O(revoke | violation)`) rather than as a material conditional avoids the exact trap SDL fell
+into — the obligation to revoke exists and is reasonable about *before* any violation, without becoming
+vacuously true or licensing bad inferences once anything is forbidden.
 
 ### Obligation chains from delegation
 
-When agent A delegates a permission to agent B, the reasoner must derive the correlative obligations
-automatically, not require them to be stated separately:
+When agent A delegates a permission to agent B, the reasoner derives the correlative obligations
+automatically:
 
 ```
 delegate(A, B, permission(read, R, S)) →
     O(A, audit(B.actions(R))) ∧
-    O(A, revoke(B, R) | violation(B, R)) ∧
+    O(A, revoke(B, R) | violation(B, R)) ∧      ← dyadic, per above
     liable(A, damages(B.actions(R)))
 ```
 
-I.e. delegating read access on resource R to B within scope S obliges A to audit B's actions, obliges A
-to revoke on violation, and makes A liable for damages from B's actions under that grant.
-
 ### The closure problem
 
-What is the normative status of an action nobody explicitly addressed? Two closure policies, selectable
-per deployment/agent (not a global constant):
+The normative status of an action nobody explicitly addressed is a **per-domain configuration value**,
+not a hardcoded answer (SDL's own "Exhaustion" theorem forces a closed-world answer real normative
+systems don't actually have):
 
-- **Permissive closure**: everything not forbidden is permitted (suits a general-purpose assistant with
-  explicit prohibitions).
-- **Prohibitive closure**: everything not permitted is forbidden (suits a high-stakes agent, e.g.
-  financial trading, with explicit permissions).
+- **Permissive closure**: unaddressed ⇒ permitted (a general-purpose assistant with explicit
+  prohibitions).
+- **Prohibitive closure**: unaddressed ⇒ forbidden (a high-stakes agent, e.g. one that moves money, with
+  explicit permissions).
 
-### Permission resolution algorithm
+## Architecture (resolved by the implementation spec)
 
-Given a request `(agent, action, resource, context)`, the reasoner must:
+- **Data model**: `frozen=True, slots=True` dataclasses — `Agent`, `Resource`, `Norm`, `Fact`, `Scope`,
+  `Condition`, `Provenance`, plus `Relation` and `DeonticStatus` enums. All JSON-round-trippable via
+  `dataclasses.asdict`/a small `from_dict`, no custom binary format.
+- **Forward-chaining engine**: a fixed-point loop — match rules against working-memory facts, fire,
+  collect new facts, repeat until nothing new is derived (or a `max_iterations` cap raises
+  `ReasonerTimeout`, guarding against malformed/oscillating rule sets). Rules are plain Python
+  (`Rule(name, antecedents, consequent)`) with simple positional pattern matching — not a general
+  unifier, arity is small and fixed.
+- **Conflict detection**: since the NC axiom isn't globally enforced, a hand-rolled DPLL SAT solver
+  (unit propagation + chronological backtracking + branching, no CDCL/VSIDS — unnecessary at this scale)
+  checks consistency of derived norms, **scoped per `(subject, resource)` group** so one unrelated
+  conflict can never make the whole system unsatisfiable ("deontic explosion", guarded against
+  explicitly). On UNSAT, it extracts the **minimal conflicting subset** (assumption-literal/unsat-core
+  style) so a conflict can be explained by which specific norms clash, not just reported as a boolean.
+- **Conflict resolution**: a pluggable, named `CombiningAlgorithm` (deny-overrides, permit-overrides,
+  first-applicable, priority-weighted — the XACML-standard pattern) replaces the PDF's informally-stated
+  "specific beats general, prohibition beats permission." A genuine tie/undecidable case returns "escalate,"
+  never a silent guess. Immunity is checked and short-circuits **before** any combining algorithm runs,
+  consistent with Hohfeld's own structural priority of immunity over ordinary conflict-weighing.
+- **Delegation/liability chain validation**: cycle detection via stdlib `graphlib.TopologicalSorter`
+  (delegation graphs must be acyclic — a cycle is either a modeling error or an authority-laundering
+  attempt); chain validity itself is a linear walk once each agent has exactly one direct delegator.
+- **Condition evaluation**: `Condition(predicate, args)` pairs resolved through a fixed, engine-owned
+  predicate registry — **never** `eval()`/`exec()` on data that traces back to an external agent request.
+- **Audit trail**: every rule firing and decision is logged (which rule, from which facts, producing
+  which derived facts/decision) for explainability.
+- **End-to-end pipeline**: query candidates → filter by scope (re-checked at decision time, not cached
+  from derivation time — scoped norms can expire between derivation and use) → immunity check → SAT
+  consistency check → resolve conflicts (or escalate) → validate delegation chain → decide (permit, with
+  derived obligations and liability chain attached; or apply closure policy if nothing matched at all).
 
-1. Query the permission store for candidates matching agent/action/resource.
-2. Filter candidates by scope (temporal bounds, context, conditions).
-3. Check whether an immunity blocks the operation outright → if so, deny/protect immediately.
-4. Resolve conflicts among remaining candidates using precedence rules: **specific beats general**,
-   **prohibition beats permission** (both to be applied in that order, or as configured).
-5. Validate the request against closure policy if nothing explicit matched.
-6. Validate the full delegation chain (each link's grantor actually held the power to grant, within its
-   own constraints and depth limits) — a broken chain denies the request regardless of the leaf
-   permission.
-7. Emit a decision (`PERMIT` or `DENY`), and on `PERMIT`, the obligations generated by that grant (e.g.
-   audit requirements) and the liability chain (which agents are answerable, in what order, if this
-   action later causes harm).
+Full detail, including the module layout (`models.py`, `rules.py`, `engine.py`, `conditions.py`,
+`sat.py`, `resolve.py`, `chains.py`, `pipeline.py`, `audit.py`), Mermaid diagrams, and code sketches, is
+in the implementation spec §4–11 — not duplicated here.
 
-```mermaid
-flowchart TD
-    A["Request: (agent, action, resource, context)"] --> B[Query permission store]
-    B --> C[Filter by scope]
-    C --> D{Immunity blocks?}
-    D -- yes --> E[DENY: protected]
-    D -- no --> F[Resolve conflicts:\nspecific > general\nprohibition > permission]
-    F --> G{Any explicit match?}
-    G -- no --> H[Apply closure policy]
-    G -- yes --> I{Delegation chain valid?}
-    H --> I
-    I -- no --> J[DENY: chain broken]
-    I -- yes --> K[PERMIT:\ngenerate obligations\nemit liability chain]
-```
+## Resolved: stdlib vs. SymPy
 
-### Liability chains
+Settled, superseding the open question raised earlier in onboarding: **hand-roll everything**, including
+the SAT solver — a real DPLL core is on the order of ~240 lines of pure-stdlib Python, and clause sets
+here stay small because consistency checks are scoped per `(subject, resource)` group, never global.
+SymPy remains the one sanctioned dependency, reserved **only** as a fallback for condition-expression
+parsing if the flat predicate registry (`conditions.py`) ever proves insufficient for a real deployment's
+condition language (nested boolean expressions, arithmetic) — not used anywhere in the baseline design.
 
-Each grant along a delegation path is recorded, e.g. `liability_chain: [C, B, A]` for a permission that
-flowed A → B → C. If C causes harm while acting under it: C is directly responsible, B is responsible
-for inadequate oversight (if it violated its audit obligation), A is responsible for the delegation
-policy that allowed it. The reasoner's job is to expose this chain on demand, not to adjudicate fault.
+## Requirements and risks already drafted (to seed `/requirements`, not re-derived from scratch)
 
-## What the reasoner must be able to do
+The implementation spec already contains:
 
-Concretely, as a Python library (no server, no CLI, no persistence layer implied yet):
+- **Functional requirements FR-1–FR-10** and **non-functional requirements NFR-1–NFR-6** (§12).
+- **A risk table R-1–R-10** (§13) covering deontic explosion, bad-inheritance paradoxes (Ross's paradox,
+  Good Samaritan paradox), delegation cycles, stale scoped norms, non-termination, condition-injection/
+  code execution, undecidable-conflict guessing, priority-governance gaming, and SAT-instance blowup —
+  each with its mitigation already specified in the design above.
+- **Nine worked test scenarios** (§14.1–14.9), including two historical-paradox regression tests
+  (Chisholm's paradox, translated into an agentic scenario, §14.8; deontic-explosion containment, §14.9)
+  — these are meant to become the literal contents of the eventual test suite once stories are broken out.
 
-- Represent agents, resources, actions, scopes, and permissions as the structured types above.
-- Represent and evaluate Hohfeldian relations and their correlatives/opposites.
-- Represent and evaluate deontic operators (`O`, `P`, `F`) with their inter-definitions enforced as
-  invariants, not restated per-fact.
-- Resolve a permission query end-to-end per the algorithm above, including scope filtering, immunity
-  short-circuiting, conflict precedence, closure-policy fallback, and delegation-chain validation.
-- Derive correlative obligations and liability chains from delegation grants automatically.
-- Support both closure policies, selectable per policy set (not hardcoded to one).
+`/requirements` should treat these as the starting draft, adjusting only where the user's own priorities
+diverge from the spec's defaults, rather than re-deriving functional/non-functional requirements from
+zero.
 
-## Open design question (carried to Requirements)
+## Open items still to settle (from the spec's own §15, carried forward — not decided here)
 
-Whether the reasoner needs genuine propositional satisfiability/boolean simplification (the kind
-`sympy.logic` provides in the precedent project) depends on how expressive `condition` clauses in scopes
-are allowed to be. If they stay simple predicate checks against a request context, pure stdlib is
-sufficient. If they must support arbitrary boolean composition of conditions that needs
-simplification/consistency-checking, SymPy becomes the pragmatic choice over hand-rolling a SAT solver.
-This will be pinned down precisely during `/requirements`.
+- **Priority governance** (R-9): the spec requires that a norm's `priority` be settable only by the
+  granting authority, never by the norm's own subject — but that's an enforcement point for whatever
+  stores/authors norms, outside the reasoning engine's own boundary. Worth an explicit requirement that
+  the reasoner treats `Norm` objects as coming from a trusted store.
+- **Rule-authoring interface**: baseline is Python-authored `Rule` objects (consistent with excluding a
+  DSL this iteration, above); a declarative surface syntax compiled to that shape is a plausible later
+  addition, not required now.
+- **Horty-style prioritized default logic**: `PriorityWeighted` combining algorithm is a pragmatic
+  stand-in for the field's most-developed formal treatment of defeasible-obligation prioritization
+  (Horty, *Reasons as Defaults*), not a claim of formal equivalence to it.
+- **Consistency-check frequency**: baseline checks once per fixed point plus on-demand per resolution
+  request; checking after every rule firing would catch conflicts earlier in a long derivation chain at
+  higher cost — not decided.
+- **SAT solver upgrade path**: if the hand-rolled solver becomes a real bottleneck, the documented
+  escalation is to benchmark against `pysat` before considering a dependency change — no performance
+  threshold for revisiting this is defined yet.

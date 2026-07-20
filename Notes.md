@@ -36,7 +36,16 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
+- Added `documentation/references/query-2026-07-21-deontic-reasoner-implementation-spec.md` as the
+  primary architectural blueprint for the reasoner, superseding the PDF wherever the two disagree on
+  specifics (it was written to formalize the PDF's informal parts under this project's own constraints).
+  Resolves the earlier open stdlib-vs-SymPy question: hand-roll everything (incl. a ~240-line DPLL SAT
+  solver), SymPy reserved only as a fallback for condition-expression parsing, not used in the baseline.
+  Its FR/NFR tables, risk table (R-1–R-10), and nine worked test scenarios are intended to seed
+  `/requirements` directly rather than being re-derived from scratch.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-User to review and approve documentation/Description.md (semantic reasoner for Hohfeldian/deontic agent permissions, Python 3.14, stdlib-first, SymPy pre-approved as fallback); on approval, run /setup.
+User to review and approve the updated documentation/Description.md (now grounded in the implementation
+spec's concrete architecture: forward chaining, hand-rolled SAT conflict detection, combining algorithms,
+delegation-chain validation via graphlib); on approval, run /setup.
