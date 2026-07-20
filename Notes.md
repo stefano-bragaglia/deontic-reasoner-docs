@@ -39,4 +39,4 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /describe to produce documentation/Description.md from the user's idea.
+User to review and approve documentation/Description.md (semantic reasoner for Hohfeldian/deontic agent permissions, Python 3.14, stdlib-first, SymPy pre-approved as fallback); on approval, run /setup.
