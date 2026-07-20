@@ -1,0 +1,18 @@
+# Harness files vendored from new-sdlc — present so Claude/Obsidian can use
+# them, but canonically versioned only in the new-sdlc repo itself. Not
+# tracked per-project to avoid duplicating/drifting the same content across
+# every vault's history.
+.claude/commands
+.obsidian
+templates
+CLAUDE.md
+
+# project/ is its own independent git repository (the public/private code repo),
+# nested inside the vault but never tracked by the vault's own history.
+project/
+
+# Serena MCP's per-checkout local state, not part of the template.
+.serena/
+
+# Local MCP config — carries a live Obsidian REST API bearer token, machine-specific.
+.mcp.json
