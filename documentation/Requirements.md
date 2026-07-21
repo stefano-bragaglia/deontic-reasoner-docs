@@ -83,6 +83,10 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
    system's entire atom history.
 7. **Test coverage**: ≥90% coverage, both aggregate and per-file, per this vault's standing project-wide
    quality gate (`CLAUDE.md → Hard Rules`).
+8. **Acceptance criteria**: the nine worked scenarios from the fuller implementation spec (§14.1–14.9)
+   are adopted, adapted to this framework's semantics per *Questions: Scenario Coverage* #5's detailed
+   scenario-by-scenario mapping. `/features` and `/stories` should map each adapted scenario onto the
+   story that implements the capability it exercises, rather than deriving new test cases from scratch.
 
 ## User Interaction Model
 
@@ -184,6 +188,33 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
    `graphlib`-based chain validation in §14.5). Do we adapt those scenarios' *intent* to the new
    weighted-count-preference semantics, write new scenarios from scratch against the 13-predicate
    minimal set, or something else?*
+   _A: Adapt the same nine scenarios' intent, re-expressed under `best_worlds`/weighted-count preference:_
+   - _§14.1 (scope expiry), §14.2 (directed right/duty via `norm`/`counterparty`), §14.3 (delegation
+     derives its oversight obligations), §14.7 (scope-narrowing on re-delegation), and §14.8 (Chisholm's
+     paradox) translate **unchanged** — none ever depended on the superseded SAT/combining-
+     algorithm/`graphlib` machinery; §14.8 is now more directly on-target, since it tests exactly the
+     dyadic-conditional-obligation mechanism this framework is built around._
+   - _§14.4 (conflict + deny-overrides) adapts: two rules of different weight both apply;
+     `is_permitted`/`is_obligatory` under weighted-count preference resolves to whichever rule's
+     satisfaction costs less violated weight. The query still gets the right answer, but the explicit
+     unsat-core "which norms conflict" explanation is lost along with the SAT layer — the adapted
+     scenario asserts only the query outcome, not a conflict-explanation object._
+   - _§14.5 (broken delegation chain) adapts: drop graph-cycle detection specifically (deferred, same as
+     `graphlib`-based validation generally), but preserve the single-broken-link-denies intent — model
+     each hop as a `delegated` fact plus a per-hop `valid_link` fact, and assert a downstream permission
+     fails to derive when one hop's `valid_link` fact is simply absent from `initial_facts`. This falls
+     out of ordinary conditional-rule matching (requirement 12's own mechanism), no dedicated
+     chain-walking module needed this iteration._
+   - _§14.6 (power creates a norm; immunity blocks revocation) splits: the power-creates-a-norm half
+     translates directly (it's literally requirement 14a); the immunity-blocks-revocation half is out of
+     scope per Q7 below — reduced to asserting an `IMMUNITY`-relation norm fact can be represented and
+     forward-chained over correctly, not that it behaviorally blocks anything._
+   - _§14.9 (deontic explosion containment) adapts: test that `best_worlds`/`is_obligatory` for an
+     unrelated query (`AgentY`/`task2`) is unaffected by a conflicting, unrelated rule pair
+     (`AgentX`/`task1`). Under this framework the containment property is **structural** (each query is
+     local to its own antecedent, not a global consistency pass) rather than the result of a deliberate
+     partitioning design decision the SAT version required — that structural difference is itself worth
+     a regression test._
 
 ## Questions: Power and Immunity Semantics
 
