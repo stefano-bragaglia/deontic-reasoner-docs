@@ -15,7 +15,12 @@ parentheses so the two documents stay traceable to each other.
    `from_dict`, no custom binary format, no ORM or database dependency. (spec FR-1, NFR-6)
 2. The system shall represent all four Hohfeldian relations (privilege, right, power, immunity) as a
    first-class `Relation` enum on every norm, alongside the norm's deontic status (obligatory,
-   permitted, forbidden). (spec FR-1)
+   permitted, forbidden). The engine shall **automatically and always** derive each relation's
+   correlative (Right → counterparty Duty, Privilege → No-Right, Power → Liability, Immunity →
+   Disability) as a built-in forward-chaining rule whenever a norm of that relation type is asserted — no
+   per-domain rule-authoring is required to get the correlative, since correlativity is a definitional
+   consequence of Hohfeld's framework, not an optional convenience. (spec FR-1; see *Questions: Built-in
+   Semantics* #3)
 3. The system shall support conditional (dyadic) obligations — `O(φ | ψ)` as a primitive, not a material
    conditional — so contrary-to-duty norms (e.g. "revoke access on violation") can be represented and
    reasoned about without the classical contrary-to-duty failure modes (Chisholm's paradox). (spec §3.3)
@@ -160,6 +165,10 @@ instances by hand, if that's more convenient for their integration.
    whenever a norm of that relation type is asserted, or building blocks a rule-author must explicitly
    wire up per domain (as the implementation spec's one worked example — the delegation-obligations rule
    — does)?*
+   _A: Automatic and built-in — the engine always derives the correlative fact whenever a norm of that
+   relation type is asserted, with no per-domain opt-in required. The four correlatives are definitional
+   consequences of Hohfeld's own framework, not an optional convenience, so no domain should be able to
+   forget to wire one up._
 4. *Q: Should scope-narrowing on re-delegation (a delegatee's granted scope must be a subset of the
    delegator's own scope, never wider — worked example §14.7 in the implementation spec) be enforced
    automatically by the engine's core delegation handling, or left as an example/opt-in rule?*
