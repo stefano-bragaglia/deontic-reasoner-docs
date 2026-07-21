@@ -23,7 +23,6 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
-- [ ] Q: Does Rule.weight need the same trust-boundary treatment as Norm.priority? (#2)
 - [ ] Q: How does scope_matches relate to a predicate-registry design? (#3)
 - [ ] Q: Are hard constraints actually needed by this iteration's scenarios? (#4)
 - [ ] Q: Which worked scenarios ground this iteration's acceptance criteria? (#5)

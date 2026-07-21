@@ -15,7 +15,12 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
    by construction, matching the `frozen=True, slots=True` convention used elsewhere for types that must
    live in `set`s. (feature 2; see *Questions: Data Representation* #1)
 3. The system shall represent **conditional rules** as `(body, head, weight)` triples — the norm
-   representation. An empty/trivial body is an unconditional (default) obligation. (feature 3)
+   representation. An empty/trivial body is an unconditional (default) obligation. `weight` is treated
+   as coming from a trusted authoring/storage layer — the reasoning engine itself never enforces who may
+   set or change it, but the engine's own consumers (whatever stores/authors rules) must ensure only the
+   granting authority sets it, never the rule's own subject-agent, to prevent self-inflated priority
+   under `best_worlds`'s weighted-count ordering (requirement 6). (feature 3; see *Questions: Trust and
+   Governance* #2)
 4. The system shall represent **hard constraints** — formulas whose violation excludes a world from
    consideration entirely, distinct from a rule violation (which merely disprefers a world). (feature 4)
 5. The system shall implement `violates(rule, world) -> bool`: does this world make the rule's body true
@@ -129,6 +134,13 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
    that `Norm.priority` got in an earlier round of this project (now superseded, but the underlying
    governance concern — a delegatee inflating its own weight to outrank its delegator — is the same
    shape of problem)?*
+   _A: Same treatment. `Rule.weight` decides which competing rule wins under `best_worlds`'s
+   weighted-count ordering — the identical role `Norm.priority` played in the now-superseded
+   `PriorityWeighted` combining algorithm — so the same governance risk applies unchanged: nothing in the
+   query engine itself stops a delegatee from asserting a rule with an inflated weight to out-rank
+   restrictions imposed by its delegator. Weight must be set by the rule's granting/authoring authority
+   at authoring time, never mutable by the rule's own subject-agent — a requirement on whatever
+   stores/authors rules, out of scope for the reasoning engine itself to enforce._
 
 ## Questions: Scope Evaluation
 
