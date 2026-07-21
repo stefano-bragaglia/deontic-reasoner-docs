@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-stories
+stage-a
 
 ## Project
 name: deontic-reasoner
@@ -55,6 +55,10 @@ status: <!-- unpublished | built | published | failed -->
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
+| 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
+| 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
+| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
+| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -149,8 +153,18 @@ status: <!-- unpublished | built | published | failed -->
   args) pairs" phrasing and feature 1's already-approved `Norm.condition: Atom | None` (a bare name, no
   separate args field): registered callables take `(norm, request)` directly instead of a separate
   `args` tuple — same no-`eval()`/`exec()` safety property, just no missing field.
+- `6-forward-chaining-and-delegation` (last feature) broken into 4 approved stories (delegation
+  grounding, power-exercise generation, delegation narrowing, the integration loop). Every feature now
+  has an approved story breakdown — 18 stories total across 6 features. Three findings worth
+  remembering: (1) the dyadic revoke-on-violation condition needs no new type, it's just the violation
+  atom folded into the rule's `body` conjunction; (2) §14.5's "permission fails to derive" reads as
+  `is_obligatory` going `True`→`False`, not `is_permitted`→`False` — an unconstrained atom is permitted
+  by default in this framework, a real and deliberate property, not a gap; (3) genuine multi-round
+  fixed-point convergence is made real, not just claimed, by grounding every norm *before* applying
+  power exercises within each iteration, so a newly-exercised norm's own correlative is deferred to the
+  next round — tested explicitly in story 4.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 6-forward-chaining-and-delegation next (the last feature) — /stage-a does not start until
-every feature has an approved story breakdown.
+Run /stage-a 1-core-data-model/1-propositional-core-types (first story, no dependencies) — all 6
+features now have approved story breakdowns.
