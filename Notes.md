@@ -179,6 +179,18 @@ status: <!-- unpublished | built | published | failed -->
   machine since `/setup`; this fix (and any future hook edit) needs manual reapplication on any other
   clone. Not restructured into a tracked wrapper script — out of scope of what was asked, flagged here
   in case it's wanted later.
+- User confirmed the local-hooks-untracked behavior is expected (not something to fix), and asked for a
+  companion `pre-push` hook mirroring CI, plus the same for future `/setup` runs. Added
+  `project/.git/hooks/pre-push` — runs all five gates unconditionally (ruff, radon, pydoclint,
+  pytest+coverage, per-file coverage), matching `ci.yml` exactly, before any push reaches origin.
+  Updated `.claude/commands/setup.md` (the reusable skill definition) step 11 to describe both hooks and
+  step 5 to install/configure `pydoclint` by default — so a future `/setup` run on a new project gets
+  this same rigor without re-deriving it. Verified the new hook passes by running it directly.
+- Dataclass field-level docstrings (`check-class-attributes`) are possible but need a specific,
+  easy-to-get-wrong incantation — `:ivar <name>: <description>` (not `:param:`, which pydoclint's
+  sphinx-attribute parser doesn't recognize at all for class attributes, confirmed by direct testing).
+  Shown to the user as an example; awaiting their decision on whether to turn
+  `[tool.pydoclint] check-class-attributes` on in `project/pyproject.toml`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
