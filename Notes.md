@@ -207,6 +207,17 @@ status: <!-- unpublished | built | published | failed -->
   into the story branch, then re-add docstrings to `Rule`/`HardConstraint` in `models.py` as a fresh,
   properly-scoped commit (the content was reverted along with the infra, but the classes will need it
   again once the merged-in `pyproject.toml` starts requiring it).
+- **Further correction**: `__init__.py`'s docstring itself was still wrongly on the infra branch — the
+  user pointed out it's genuine package content belonging to whichever story establishes the package
+  (story 1), not tooling. Fixing that surfaced a real mechanical tension: `ruff`'s `D104` requires a
+  package docstring on *any* `__init__.py`, so the infra branch couldn't leave it untouched and still
+  pass its own CI. Resolved by exempting `__init__.py` from `D104` entirely
+  (`"**/__init__.py" = ["D104"]`) — package-level docstrings are now optional, entirely a story's own
+  choice, never infra-mandated. PR #2 now touches zero `src/` files
+  (`ci.yml`/`pyproject.toml`/`check_file_coverage.py`/`uv.lock` only); the package docstring was
+  re-added on the story branch as its own commit. Both PRs' scopes verified via
+  `gh pr diff <n> --name-only` — PR #1: `__init__.py`, `models.py`, `test_models_core.py`; PR #2: no
+  `src/` files at all. CI green on both, on GitHub.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
