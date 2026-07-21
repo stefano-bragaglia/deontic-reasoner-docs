@@ -44,7 +44,9 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
     atom-bearing fact via `norm(subject, relation, action, resource, condition)`, so the propositional
     core can reason over it. `relation=right` is what gives *directed* obligation (owed by a specific
     counterparty to a specific holder) — something the bare dyadic layer cannot express alone.
-    (feature 10)
+    `relation=immunity` is purely representational this iteration — groundable, forward-chainable, and
+    JSON-serializable like the other three, but with no behavior yet that makes it block anything (see
+    *Questions: Power and Immunity Semantics* #7). (feature 10)
 11. The system shall represent the correlative bearer of a `right`/`power`/`immunity` norm via
     `counterparty(norm, agent)` — who owes the duty, is liable, or is disabled. (feature 11)
 12. The system shall derive a delegation's oversight obligations (audit, revoke-on-violation, liable)
@@ -240,3 +242,10 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
    full short-circuiting behavior that's explicitly out of scope per `Description.md` — or is it purely
    representational (grounded as an atom via `norm(...)`, with no behavior yet) until a later iteration
    gives it real teeth?*
+   _A: Purely representational. `Relation.IMMUNITY` is groundable as a `norm(...)` fact (requirement 10)
+   and carries a `counterparty` (requirement 11) like any other Hohfeldian relation, forward-chainable
+   and JSON-serializable like the other three relations — but with no behavior yet that makes it
+   actually block a power's exercise or a revocation. Giving it real teeth (the short-circuit-before-
+   resolution behavior from the earlier, fuller design) is later-iteration work, consistent with how
+   immunity short-circuiting is already listed in *Out of scope* alongside the rest of that superseded
+   architecture._

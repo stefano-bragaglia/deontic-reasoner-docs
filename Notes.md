@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-requirements
+features
 
 ## Project
 name: deontic-reasoner
@@ -23,7 +23,6 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
-- [ ] Q: Does Relation.IMMUNITY need any special semantic treatment this iteration? (#7)
 
 ## Features
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
@@ -82,8 +81,18 @@ status: <!-- unpublished | built | published | failed -->
   and outputs/Key behaviours/Out of scope/Open questions/Tech stack) and approved by the user as-is, no
   changes requested. Content is the same minimal Preferential Dyadic Deontic Logic framework from the
   prior pivot, now explicit that the MCP server is deferred to a separate later iteration.
+- Requirements Q&A resolved (full detail + rationale in `documentation/Requirements.md → Questions`):
+  `World = frozenset[str]`, with `best_worlds` enumeration scoped to the atoms actually mentioned in the
+  loaded rule set/antecedent (this vault's own extrapolation, not a sourced claim); `Rule.weight` gets
+  the same trust-boundary treatment `Norm.priority` had (granting authority sets it, never the rule's
+  own subject); `scope_matches` reuses the predicate-registry design unchanged (trust boundary is
+  independent of which deontic framework is underneath); hard constraints stay in the requirement set
+  but are unexercised reserve infrastructure this iteration; the implementation spec's nine worked
+  scenarios (§14.1–14.9) are adapted (not dropped, not rewritten from scratch) to weighted-count
+  preference semantics, scenario-by-scenario; powers need no dedicated predicate (an ordinary
+  domain-specific fact as a conditional rule's body suffices, generalizing delegation's own mechanism);
+  `Relation.IMMUNITY` is purely representational this iteration, no short-circuit behavior yet.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-User to answer the seven open questions in documentation/Requirements.md (also mirrored in Open
-Questions above, asked one at a time); once resolved, set Phase: features and run /features.
+Run /features to propose this iteration's epics from documentation/Requirements.md.
