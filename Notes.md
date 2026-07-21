@@ -23,6 +23,12 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
+- [ ] Q: Default combining algorithm when none specified — system default or require explicit? (see documentation/Requirements.md → Questions: Default Policies #1)
+- [ ] Q: Default closure policy when none specified — raise, or a global fallback (permissive/prohibitive)? (#2)
+- [ ] Q: Are the four Hohfeldian correlative derivations auto-applied built-in rules, or opt-in building blocks? (#3)
+- [ ] Q: Is scope-narrowing on re-delegation enforced automatically by the engine, or opt-in? (#4)
+- [ ] Q: Is true fact retraction needed this iteration, or is append-only (spec's model) sufficient? (#5)
+- [ ] Q: Adopt the implementation spec's nine worked test scenarios (§14.1–14.9) as acceptance criteria as-is? (#6)
 
 ## Features
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
@@ -58,5 +64,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /requirements to derive formal requirements from documentation/Description.md (leaning on the
-implementation spec's already-drafted FR/NFR tables, risk table, and worked test scenarios).
+User to answer the six open questions in documentation/Requirements.md (also mirrored in Open Questions
+above); once resolved, set Phase: features and run /features.
