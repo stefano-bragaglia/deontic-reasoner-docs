@@ -41,7 +41,7 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Story | Branch | Status |
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
-| 1-core-data-model | 1-propositional-core-types | story/1-core-data-model/1-propositional-core-types | tests |
+| 1-core-data-model | 1-propositional-core-types | story/1-core-data-model/1-propositional-core-types | code |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | | approved |
 | 1-core-data-model | 3-json-round-trip | | approved |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
@@ -166,6 +166,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 1-core-data-model/1-propositional-core-types (tests written on
-story/1-core-data-model/1-propositional-core-types, epic branch feature/1-core-data-model created and
-pushed).
+Run /pr 1-core-data-model/1-propositional-core-types to open this story's PR against
+feature/1-core-data-model (all gates green, 100% coverage).
