@@ -186,11 +186,13 @@ status: <!-- unpublished | built | published | failed -->
   Updated `.claude/commands/setup.md` (the reusable skill definition) step 11 to describe both hooks and
   step 5 to install/configure `pydoclint` by default — so a future `/setup` run on a new project gets
   this same rigor without re-deriving it. Verified the new hook passes by running it directly.
-- Dataclass field-level docstrings (`check-class-attributes`) are possible but need a specific,
-  easy-to-get-wrong incantation — `:ivar <name>: <description>` (not `:param:`, which pydoclint's
-  sphinx-attribute parser doesn't recognize at all for class attributes, confirmed by direct testing).
-  Shown to the user as an example; awaiting their decision on whether to turn
-  `[tool.pydoclint] check-class-attributes` on in `project/pyproject.toml`.
+- **Settled**: dataclass field-level docstrings keep using `:param:` (user's explicit preference,
+  confirmed after seeing that `:ivar:`/inline are the only two forms `pydoclint`'s sphinx-attribute
+  parser recognizes for strict checking — verified by direct testing under every relevant setting
+  combination, not a config mistake). Trade-off accepted: `[tool.pydoclint] check-class-attributes`
+  stays `false` — `:param:`-documented attributes aren't machine-checked for per-field completeness,
+  only the class-level docstring's existence is (`ruff` D101). No code change needed: `models.py`
+  already used `:param:` in its class docstrings.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
