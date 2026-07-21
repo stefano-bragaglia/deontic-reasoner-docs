@@ -42,7 +42,7 @@ status: <!-- unpublished | built | published | failed -->
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
-| 1-core-data-model | 2-hohfeldian-norm-and-relation | story/1-core-data-model/2-hohfeldian-norm-and-relation | tests |
+| 1-core-data-model | 2-hohfeldian-norm-and-relation | story/1-core-data-model/2-hohfeldian-norm-and-relation | code |
 | 1-core-data-model | 3-json-round-trip | | approved |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
@@ -234,5 +234,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 1-core-data-model/2-hohfeldian-norm-and-relation (tests written on
-story/1-core-data-model/2-hohfeldian-norm-and-relation, off the existing epic branch).
+Run /pr 1-core-data-model/2-hohfeldian-norm-and-relation to open this story's PR against
+feature/1-core-data-model (all gates green, 100% coverage).
