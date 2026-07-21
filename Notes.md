@@ -218,10 +218,15 @@ status: <!-- unpublished | built | published | failed -->
   re-added on the story branch as its own commit. Both PRs' scopes verified via
   `gh pr diff <n> --name-only` — PR #1: `__init__.py`, `models.py`, `test_models_core.py`; PR #2: no
   `src/` files at all. CI green on both, on GitHub.
+- **PR #2 merged** by the user. Ran the planned follow-up: fast-forwarded `feature/1-core-data-model` to
+  the new `main` (pushed), merged it into the story branch (clean, no conflicts), then re-added reST
+  docstrings to `Rule`/`HardConstraint` in `models.py` as their own commit — now required by the
+  merged-in `pyproject.toml`. All gates (ruff, radon, pydoclint, pytest+coverage) pass locally and in
+  GitHub Actions on PR #1. PR #1 was previously blocked on review specifically because it lacked these
+  docstrings; that's now resolved.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/2 (docstring-enforcement
-infra into main) and https://github.com/stefano-bragaglia/deontic-reasoner/pull/1 (story PR into
-feature/1-core-data-model, now correctly scoped); once PR #2 merges, sync feature/1-core-data-model and
-the story branch with the new main, re-add models.py docstrings, then continue.
+Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/1 (story PR into
+feature/1-core-data-model, docstrings now added, CI green); on merge, mark it done and move to
+/stage-a 1-core-data-model/2-hohfeldian-norm-and-relation.
