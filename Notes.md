@@ -51,6 +51,8 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | | approved |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | | approved |
+| 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
+| 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -135,8 +137,13 @@ status: <!-- unpublished | built | published | failed -->
   test-only regression story each for §14.4, §14.8, §14.9). Deliberate vacuous-truth semantics
   documented in story 1: on an empty `best_worlds` result, `is_obligatory` is `True`, `is_permitted` is
   `False` (classical universal/existential quantification over an empty set).
+- `4-hohfeldian-grounding` broken into 2 approved stories (norm/correlative-rule grounding, directed-
+  obligation regression for §14.2). Correlativity is a high-weight ordinary `Rule`, deliberately **not**
+  a `HardConstraint` — a hard constraint would make it impossible to ever represent a duty being
+  violated, defeating the point. `PRIVILEGE`'s own correlative (`no_right`) is scoped out — unexercised
+  by any of the nine adapted scenarios (YAGNI).
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 4-hohfeldian-grounding next (remaining: 4 through 6-forward-chaining-and-delegation) —
+Run /stories 5-scope-evaluation next (remaining: 5 through 6-forward-chaining-and-delegation) —
 /stage-a does not start until every feature has an approved story breakdown.
