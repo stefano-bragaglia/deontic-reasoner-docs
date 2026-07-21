@@ -43,7 +43,7 @@ status: <!-- unpublished | built | published | failed -->
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
-| 1-core-data-model | 3-json-round-trip | story/1-core-data-model/3-json-round-trip | tests |
+| 1-core-data-model | 3-json-round-trip | story/1-core-data-model/3-json-round-trip | code |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
@@ -234,5 +234,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 1-core-data-model/3-json-round-trip (tests written on
-story/1-core-data-model/3-json-round-trip, off the existing epic branch).
+Run /pr 1-core-data-model/3-json-round-trip to open this story's PR against
+feature/1-core-data-model (all gates green, 100% coverage; last story of this feature).
