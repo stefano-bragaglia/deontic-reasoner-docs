@@ -1,4 +1,4 @@
-# 1. Propositional Core Types
+# 1. DONE - Propositional Core Types
 
 ## What it does
 

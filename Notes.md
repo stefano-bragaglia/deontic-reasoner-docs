@@ -41,7 +41,7 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Story | Branch | Status |
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
-| 1-core-data-model | 1-propositional-core-types | story/1-core-data-model/1-propositional-core-types | pr-open |
+| 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | | approved |
 | 1-core-data-model | 3-json-round-trip | | approved |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
@@ -224,9 +224,14 @@ status: <!-- unpublished | built | published | failed -->
   merged-in `pyproject.toml`. All gates (ruff, radon, pydoclint, pytest+coverage) pass locally and in
   GitHub Actions on PR #1. PR #1 was previously blocked on review specifically because it lacked these
   docstrings; that's now resolved.
+- **PR #1 merged** by the user. On-merge steps done: pulled the merge into `feature/1-core-data-model`
+  locally (fast-forward), deleted `story/1-core-data-model/1-propositional-core-types` (remote +
+  local) and the now-merged `chore/docstring-enforcement` (remote + local, stale cleanup). Story
+  `1-propositional-core-types` marked `merged`; its doc file renamed
+  `1-propositional-core-types.md` → `1-DONE-propositional-core-types.md` with `DONE - ` inserted in
+  its title. Feature `1-core-data-model` stays `branched` — stories 2 and 3 (`2-hohfeldian-norm-and-relation`,
+  `3-json-round-trip`) are still only `approved`, not started.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/1 (story PR into
-feature/1-core-data-model, docstrings now added, CI green); on merge, mark it done and move to
-/stage-a 1-core-data-model/2-hohfeldian-norm-and-relation.
+Run /stage-a 1-core-data-model/2-hohfeldian-norm-and-relation (next story in build order).
