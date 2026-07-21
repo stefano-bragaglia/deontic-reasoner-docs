@@ -36,13 +36,23 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
-- Added `documentation/references/query-2026-07-21-deontic-reasoner-implementation-spec.md` as the
-  primary architectural blueprint for the reasoner, superseding the PDF wherever the two disagree on
-  specifics (it was written to formalize the PDF's informal parts under this project's own constraints).
-  Resolves the earlier open stdlib-vs-SymPy question: hand-roll everything (incl. a ~240-line DPLL SAT
-  solver), SymPy reserved only as a fallback for condition-expression parsing, not used in the baseline.
-  Its FR/NFR tables, risk table (R-1–R-10), and nine worked test scenarios are intended to seed
-  `/requirements` directly rather than being re-derived from scratch.
+- Added `documentation/references/query-2026-07-21-deontic-reasoner-implementation-spec.md` as an
+  architectural reference for the reasoner. **Superseded** (see pivot below) for its SAT-based
+  conflict-detection/combining-algorithm design specifically; its dataclass/JSON data-modeling
+  conventions and forward-chaining fixed-point loop mechanics remain valid implementation patterns.
+- **Framework pivot**: adopted `documentation/references/query-2026-07-21-modern-deontic-framework-minimal-reasoner.md`
+  as the primary theoretical/scope blueprint, at the user's request to go minimal. Core framework is now
+  **Preferential (Betterness-Ordering) Dyadic Deontic Logic** (Hansson dyadic `O(q|p)` + KLM preferential
+  semantics) — a 13-predicate minimal set (9 propositional core: atoms/worlds/conditional
+  rules/hard constraints/violates/preferred/best_worlds/obligation query/permissibility query; 4 agentic
+  extension: norm/counterparty/delegated/scope_matches), with **weighted-count** as the default
+  preference criterion. This *replaces* the earlier SAT-based conflict detection, unsat-core extraction,
+  XACML-style combining algorithms, and `graphlib` delegation-chain validation — conflict resolution now
+  falls directly out of `best_worlds` under the weighted-count ordering, no separate machinery needed.
+  Forward chaining stays in scope (for norm-generating power exercises and delegation's derived
+  obligations) but is layered around this new query engine, not around SAT. This also makes the earlier
+  stdlib-vs-SymPy SAT question moot — there's no SAT solving in the core at all now; SymPy could only
+  ever resurface for the `scope_matches` condition language, same as before.
 - `/setup` complete. Docs repo `deontic-reasoner-docs` and code repo `deontic-reasoner` both created
   public on GitHub per user's explicit choice (setup's own default recommends docs=private; user chose
   public for both). Branch protection applied to code repo's `main` (0 required reviews, CI job `test`
@@ -70,5 +80,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Waiting on the user for what to change in documentation/Description.md; once known, revise it, present
-for approval, then re-run /requirements -> /features -> /stories from scratch.
+documentation/Description.md has been rewritten around the minimal Preferential Dyadic Deontic Logic
+framework — present it to the user for approval; once approved, re-run /requirements -> /features ->
+/stories from scratch.
