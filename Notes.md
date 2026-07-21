@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-features
+stories
 
 ## Project
 name: deontic-reasoner
@@ -28,6 +28,14 @@ status: <!-- unpublished | built | published | failed -->
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
 <!-- branched: epic branch created lazily by /stage-a on that feature's first story, not by /features -->
 <!-- stories-merged: every story for this feature is `merged`, but the epic PR into main isn't open yet -->
+| Feature | Status | Branch |
+|---|---|---|
+| 1-core-data-model | approved | |
+| 2-preference-ordering-and-best-worlds | approved | |
+| 3-obligation-and-permissibility-queries | approved | |
+| 4-hohfeldian-grounding | approved | |
+| 5-scope-evaluation | approved | |
+| 6-forward-chaining-and-delegation | approved | |
 
 ## Stories
 | Feature | Story | Branch | Status |
@@ -96,7 +104,14 @@ status: <!-- unpublished | built | published | failed -->
   also carries `_A:_` answers in place, matching the resolutions already recorded in `Requirements.md` —
   kept both documents internally consistent rather than leaving `Description.md`'s questions dangling
   unanswered after `Requirements.md` settled them.
+- Six features approved (`documentation/features/1-core-data-model` through
+  `6-forward-chaining-and-delegation`), numbered in dependency/build order — notably leaner than the
+  previous (superseded) 8-feature breakdown, since no dedicated SAT-detection/conflict-resolution
+  feature is needed (weighted-count preference in feature 2 handles that directly). All nine adapted
+  worked scenarios (§14.1–14.9) are assigned across features 3, 4, 5, and 6. No epic branches yet —
+  created lazily by `/stage-a` per `CLAUDE.md → Branching Model`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /features to propose this iteration's epics from documentation/Requirements.md.
+Run /stories <feature> for each feature, one at a time, in build order — starting with
+/stories 1-core-data-model. /stage-a does not start until every feature has an approved story breakdown.
