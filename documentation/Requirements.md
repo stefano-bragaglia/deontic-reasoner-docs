@@ -58,7 +58,10 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
 14. The system shall forward-chain a rule set to a fixed point, wrapped *around* the query engine
     (requirements 1–13), to derive: (a) new norm facts created by a power's exercise, and (b)
     delegation's derived obligations (requirement 12) — repeating until no new fact is derived, or a
-    bounded iteration cap is hit.
+    bounded iteration cap is hit. A power's exercise needs no dedicated predicate — it is an ordinary,
+    domain-specific fact (e.g. `grant(...)`, `waive(...)`) used as a conditional rule's body, the same
+    "no separate mechanism" principle requirement 12 already establishes for delegation, generalized to
+    every other power-exercise shape (see *Questions: Power and Immunity Semantics* #6).
 15. The system shall represent all core data (atoms, worlds, rules, norms, and the predicates above) as
     JSON-serializable Python dataclasses, with no custom binary format.
 
@@ -223,6 +226,16 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
    explicitly for delegation (predicate 12) but names no analogous predicate for a generic power
    exercise — is a new predicate needed, or does an ad hoc fact shaped like `delegated` suffice for
    every power-exercise case this iteration actually needs to handle?*
+   _A: No new predicate. `delegated` earned a dedicated, named predicate because delegation is one
+   single, structurally uniform pattern — but a Hohfeldian power covers a genuinely heterogeneous family
+   of acts (waiving, annulling, transferring, consenting, granting, revoking), not one fixed shape, so
+   there's no single analogous predicate to add. The general mechanism already suffices: a power's
+   exercise is an ordinary, domain-specific fact (whatever the deployment calls it — `grant(...)`,
+   `waive(...)`, etc.) as the body of an ordinary conditional rule (requirement 3), whose head asserts a
+   new `norm(...)` fact — the same "no separate mechanism" principle requirement 12 already establishes
+   for delegation, generalized. Whether a given deployment wants to name its own convenience predicate
+   for common power-exercise shapes is a per-deployment modeling choice, not something the minimal core
+   needs to anticipate._
 7. *Q: Does `Relation.IMMUNITY` need any special semantic treatment in this iteration — even short of the
    full short-circuiting behavior that's explicitly out of scope per `Description.md` — or is it purely
    representational (grounded as an atom via `norm(...)`, with no behavior yet) until a later iteration
