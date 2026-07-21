@@ -53,6 +53,8 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | | approved |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
+| 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
+| 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -142,8 +144,13 @@ status: <!-- unpublished | built | published | failed -->
   a `HardConstraint` — a hard constraint would make it impossible to ever represent a duty being
   violated, defeating the point. `PRIVILEGE`'s own correlative (`no_right`) is scoped out — unexercised
   by any of the nine adapted scenarios (YAGNI).
+- `5-scope-evaluation` broken into 2 approved stories (predicate registry/condition evaluation,
+  temporal scope + §14.1 regression). Clarified a mismatch between Requirements Q3's "(predicate_name,
+  args) pairs" phrasing and feature 1's already-approved `Norm.condition: Atom | None` (a bare name, no
+  separate args field): registered callables take `(norm, request)` directly instead of a separate
+  `args` tuple — same no-`eval()`/`exec()` safety property, just no missing field.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 5-scope-evaluation next (remaining: 5 through 6-forward-chaining-and-delegation) —
-/stage-a does not start until every feature has an approved story breakdown.
+Run /stories 6-forward-chaining-and-delegation next (the last feature) — /stage-a does not start until
+every feature has an approved story breakdown.
