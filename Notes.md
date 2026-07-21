@@ -44,6 +44,9 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 1-propositional-core-types | | approved |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | | approved |
 | 1-core-data-model | 3-json-round-trip | | approved |
+| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
+| 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
+| 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -118,9 +121,15 @@ status: <!-- unpublished | built | published | failed -->
   hard-constraint exclusion) leaks in here; that's `2-preference-ordering-and-best-worlds`'s job.
   `Rule.head` is a `frozenset[Atom]` (conjunction), not a single `Atom` like the interaction model's
   illustrative example — needed by a couple of the adapted worked scenarios, AND-only, no formula parser.
+- `2-preference-ordering-and-best-worlds` broken into 3 approved stories (violation/exclusion,
+  three-criteria preference ordering, scoped best-worlds enumeration). Non-obvious catch recorded in
+  story 2: `WEIGHTED_COUNT`'s weight summation must iterate in a stable, sort-key-based order (not raw
+  `frozenset` iteration order), since Python's per-process string-hash randomization could otherwise
+  make float-summation rounding vary between separate runs of the same program — a subtle violation of
+  NFR 4 (determinism) that pure "same output for same input within one run" testing wouldn't catch.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 2-preference-ordering-and-best-worlds next (remaining: 2 through
+Run /stories 3-obligation-and-permissibility-queries next (remaining: 3 through
 6-forward-chaining-and-delegation) — /stage-a does not start until every feature has an approved story
 breakdown.
