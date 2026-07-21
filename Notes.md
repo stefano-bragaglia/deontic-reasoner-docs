@@ -51,6 +51,10 @@ status: <!-- unpublished | built | published | failed -->
 | 2-forward-chaining-engine | 1-rule-representation-and-pattern-matching | | approved |
 | 2-forward-chaining-engine | 2-fixed-point-loop-and-termination | | approved |
 | 2-forward-chaining-engine | 3-rule-firing-audit-trail | | approved |
+| 3-hohfeldian-and-delegation-semantics | 1-norm-registration-and-correlative-rule | | approved |
+| 3-hohfeldian-and-delegation-semantics | 2-engine-factory-with-builtins | | approved |
+| 3-hohfeldian-and-delegation-semantics | 3-delegation-grant-with-scope-narrowing | | approved |
+| 3-hohfeldian-and-delegation-semantics | 4-delegation-obligations | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -94,9 +98,18 @@ status: <!-- unpublished | built | published | failed -->
   including ones that only reconfirm an already-known fact, not only firings that add something new.
 - User correction: `/stage-a` must not start until **every** feature has an approved story breakdown,
   not just the first one worked. See global memory `feedback_stories-before-stage-a`.
+- `3-hohfeldian-and-delegation-semantics` broken into 4 approved stories (correlative rule, engine
+  factory, delegation grant with scope-narrowing, delegation obligations). Key design resolution: pattern
+  matching alone can't branch on `Norm.relation`, so the four correlatives are one rule doing Python
+  dispatch in its consequent, not four declaratively-matched rules. Also: full §14.8 (Chisholm's
+  paradox) verification is NOT delivered by this feature alone — it only represents the dyadic
+  revoke-on-violation norm correctly; evaluating whether `given` currently holds is
+  `4-condition-and-scope-evaluation`'s job. The epic file's original §14.8 assignment to this feature is
+  therefore only partial; left as-is (epics are append-only) but noted here for when `4-condition-and-scope-evaluation`'s
+  stories are written.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 3-hohfeldian-and-delegation-semantics next (remaining: 3 through
+Run /stories 4-condition-and-scope-evaluation next (remaining: 4 through
 8-permission-resolution-pipeline) — /stage-a does not start until every feature has an approved story
 breakdown.
