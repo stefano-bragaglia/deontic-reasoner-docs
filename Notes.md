@@ -43,6 +43,11 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Story | Branch | Status |
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
+| 1-core-data-model | 1-core-enums-and-identifiers | | approved |
+| 1-core-data-model | 2-working-memory-fact | | approved |
+| 1-core-data-model | 3-norm-support-value-types | | approved |
+| 1-core-data-model | 4-norm | | approved |
+| 1-core-data-model | 5-json-round-trip | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -77,8 +82,11 @@ status: <!-- unpublished | built | published | failed -->
   `8-permission-resolution-pipeline`), numbered in dependency/build order; each of the implementation
   spec's nine worked scenarios (§14.1–14.9) is assigned to exactly one feature as its acceptance
   criteria. No epic branches yet — created lazily by `/stage-a` per `CLAUDE.md → Branching Model`.
+- `1-core-data-model` broken into 5 approved stories (enums/identifiers, Fact, Norm-support value types,
+  Norm, JSON round-trip). Deliberate deviation from the implementation spec: dropped the spec's
+  `attributes: Mapping` field from `Agent`/`Resource` (unused by any requirement, and would break the
+  frozen dataclasses' required hashability).
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories <feature> for each feature, one at a time, in build order — starting with
-/stories 1-core-data-model.
+Run /stage-a 1-core-data-model/1-core-enums-and-identifiers (first story, no dependencies).
