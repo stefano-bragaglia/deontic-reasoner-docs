@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-requirements
+features
 
 ## Project
 name: deontic-reasoner
@@ -23,7 +23,6 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
-- [ ] Q: Adopt the implementation spec's nine worked test scenarios (§14.1–14.9) as acceptance criteria as-is? (#6)
 
 ## Features
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
@@ -56,8 +55,15 @@ status: <!-- unpublished | built | published | failed -->
   `project/.git/hooks/pre-commit` and `project/.github/workflows/ci.yml`.
 - `uv init --package` seeds a `main()`/`[project.scripts]` CLI entry point by default; removed both
   (this is a library per `Description.md`, no CLI planned for this iteration).
+- Requirements Q&A resolved (full detail + rationale in `documentation/Requirements.md → Questions`):
+  default combining algorithm is deny-overrides (not an error if omitted); closure policy has no implicit
+  default (raises if omitted — safety-relevant, must be explicit per deployment); the four Hohfeldian
+  correlative derivations and delegation scope-narrowing are both automatic, built-in engine behavior, not
+  opt-in rules; working memory is append-only, no true fact retraction this iteration (revocation is a
+  new fact + scope/condition checks, preserving the audit trail and keeping derivation monotonic); the
+  implementation spec's nine worked test scenarios (§14.1–14.9) are adopted as-is as acceptance criteria
+  for `/features`/`/stories` to map onto.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-User to answer the six open questions in documentation/Requirements.md (also mirrored in Open Questions
-above); once resolved, set Phase: features and run /features.
+Run /features to propose this iteration's epics from documentation/Requirements.md.

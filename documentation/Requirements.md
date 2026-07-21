@@ -105,6 +105,11 @@ parentheses so the two documents stay traceable to each other.
    the reasoning engine itself. (spec R-9)
 9. **Test coverage**: ≥90% coverage, both aggregate and per-file, per this vault's standing project-wide
    quality gate (`CLAUDE.md → Hard Rules`; enforced by `project/scripts/check_file_coverage.py`).
+10. **Acceptance criteria**: the implementation spec's nine worked test scenarios (§14.1–14.9, including
+    the Chisholm's-paradox and deontic-explosion-containment regression tests) are adopted as-is as this
+    iteration's acceptance criteria. `/features` and `/stories` should map each scenario onto the story
+    that implements the capability it exercises, rather than deriving new test cases from scratch. (see
+    *Questions: Testing Scope* #6)
 
 ## User Interaction Model
 
@@ -204,3 +209,6 @@ instances by hand, if that's more convenient for their integration.
    including the Chisholm's-paradox and deontic-explosion-containment regression tests) be adopted
    more-or-less verbatim as this iteration's acceptance criteria, or does the breakdown into
    features/stories need to reshape any of them?*
+   _A: Yes, adopt as-is. §14.1–14.9 become the acceptance criteria for the stories that implement each
+   capability they exercise — `/features` and `/stories` should map each scenario onto the story it
+   belongs to rather than re-deriving test cases from scratch._
