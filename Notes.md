@@ -23,6 +23,13 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
+- [ ] Q: World/atom representation + tractable best_worlds enumeration? (documentation/Requirements.md → Questions: Data Representation #1)
+- [ ] Q: Does Rule.weight need the same trust-boundary treatment as Norm.priority? (#2)
+- [ ] Q: How does scope_matches relate to a predicate-registry design? (#3)
+- [ ] Q: Are hard constraints actually needed by this iteration's scenarios? (#4)
+- [ ] Q: Which worked scenarios ground this iteration's acceptance criteria? (#5)
+- [ ] Q: How is a power's exercise represented as a triggering fact? (#6)
+- [ ] Q: Does Relation.IMMUNITY need any special semantic treatment this iteration? (#7)
 
 ## Features
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
@@ -84,5 +91,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /requirements to derive formal requirements from the approved documentation/Description.md (13
-predicates: propositional core + Hohfeldian agentic extension layer).
+User to answer the seven open questions in documentation/Requirements.md (also mirrored in Open
+Questions above, asked one at a time); once resolved, set Phase: features and run /features.
