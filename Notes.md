@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-features
+stories
 
 ## Project
 name: deontic-reasoner
@@ -28,6 +28,16 @@ status: <!-- unpublished | built | published | failed -->
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
 <!-- branched: epic branch created lazily by /stage-a on that feature's first story, not by /features -->
 <!-- stories-merged: every story for this feature is `merged`, but the epic PR into main isn't open yet -->
+| Feature | Status | Branch |
+|---|---|---|
+| 1-core-data-model | approved | |
+| 2-forward-chaining-engine | approved | |
+| 3-hohfeldian-and-delegation-semantics | approved | |
+| 4-condition-and-scope-evaluation | approved | |
+| 5-conflict-detection | approved | |
+| 6-conflict-resolution | approved | |
+| 7-delegation-chain-validation | approved | |
+| 8-permission-resolution-pipeline | approved | |
 
 ## Stories
 | Feature | Story | Branch | Status |
@@ -63,7 +73,12 @@ status: <!-- unpublished | built | published | failed -->
   new fact + scope/condition checks, preserving the audit trail and keeping derivation monotonic); the
   implementation spec's nine worked test scenarios (§14.1–14.9) are adopted as-is as acceptance criteria
   for `/features`/`/stories` to map onto.
+- Eight features approved (`documentation/features/1-core-data-model` through
+  `8-permission-resolution-pipeline`), numbered in dependency/build order; each of the implementation
+  spec's nine worked scenarios (§14.1–14.9) is assigned to exactly one feature as its acceptance
+  criteria. No epic branches yet — created lazily by `/stage-a` per `CLAUDE.md → Branching Model`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /features to propose this iteration's epics from documentation/Requirements.md.
+Run /stories <feature> for each feature, one at a time, in build order — starting with
+/stories 1-core-data-model.
