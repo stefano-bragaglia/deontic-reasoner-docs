@@ -30,7 +30,7 @@ status: <!-- unpublished | built | published | failed -->
 <!-- stories-merged: every story for this feature is `merged`, but the epic PR into main isn't open yet -->
 | Feature | Status | Branch |
 |---|---|---|
-| 1-core-data-model | approved | |
+| 1-core-data-model | branched | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | approved | |
 | 3-obligation-and-permissibility-queries | approved | |
 | 4-hohfeldian-grounding | approved | |
@@ -41,7 +41,7 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Story | Branch | Status |
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
-| 1-core-data-model | 1-propositional-core-types | | approved |
+| 1-core-data-model | 1-propositional-core-types | story/1-core-data-model/1-propositional-core-types | tests |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | | approved |
 | 1-core-data-model | 3-json-round-trip | | approved |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
@@ -166,5 +166,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 1-core-data-model/1-propositional-core-types (first story, no dependencies) — all 6
-features now have approved story breakdowns.
+Run /stage-b 1-core-data-model/1-propositional-core-types (tests written on
+story/1-core-data-model/1-propositional-core-types, epic branch feature/1-core-data-model created and
+pushed).
