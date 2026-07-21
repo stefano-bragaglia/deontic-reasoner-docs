@@ -43,7 +43,7 @@ status: <!-- unpublished | built | published | failed -->
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
-| 1-core-data-model | 3-json-round-trip | story/1-core-data-model/3-json-round-trip | code |
+| 1-core-data-model | 3-json-round-trip | story/1-core-data-model/3-json-round-trip | pr-open |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
@@ -234,5 +234,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 1-core-data-model/3-json-round-trip to open this story's PR against
-feature/1-core-data-model (all gates green, 100% coverage; last story of this feature).
+Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/4 (story PR into
+feature/1-core-data-model, last story of this feature); on merge, every story for 1-core-data-model is
+merged, so set the feature to stories-merged and run /pr 1-core-data-model for the epic PR into main.
