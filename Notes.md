@@ -55,6 +55,9 @@ status: <!-- unpublished | built | published | failed -->
 | 3-hohfeldian-and-delegation-semantics | 2-engine-factory-with-builtins | | approved |
 | 3-hohfeldian-and-delegation-semantics | 3-delegation-grant-with-scope-narrowing | | approved |
 | 3-hohfeldian-and-delegation-semantics | 4-delegation-obligations | | approved |
+| 4-condition-and-scope-evaluation | 1-predicate-registry | | approved |
+| 4-condition-and-scope-evaluation | 2-scope-evaluation-at-decision-time | | approved |
+| 4-condition-and-scope-evaluation | 3-dyadic-norm-activation | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -107,9 +110,12 @@ status: <!-- unpublished | built | published | failed -->
   `4-condition-and-scope-evaluation`'s job. The epic file's original §14.8 assignment to this feature is
   therefore only partial; left as-is (epics are append-only) but noted here for when `4-condition-and-scope-evaluation`'s
   stories are written.
+- `4-condition-and-scope-evaluation` broken into 3 approved stories (predicate registry, scope
+  evaluation, dyadic norm activation). Story 3 (`3-dyadic-norm-activation`) is what actually closes out
+  full §14.8 (Chisholm's paradox) coverage that `3-hohfeldian-and-delegation-semantics` deliberately left
+  unfinished. Unregistered predicates raise `UnknownPredicateError` rather than defaulting silently.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 4-condition-and-scope-evaluation next (remaining: 4 through
-8-permission-resolution-pipeline) — /stage-a does not start until every feature has an approved story
-breakdown.
+Run /stories 5-conflict-detection next (remaining: 5 through 8-permission-resolution-pipeline) —
+/stage-a does not start until every feature has an approved story breakdown.
