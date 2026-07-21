@@ -1,4 +1,4 @@
-# 1. Core Data Model
+# 1. DONE - Core Data Model
 
 ## Name
 

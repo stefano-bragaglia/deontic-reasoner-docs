@@ -30,7 +30,7 @@ status: <!-- unpublished | built | published | failed -->
 <!-- stories-merged: every story for this feature is `merged`, but the epic PR into main isn't open yet -->
 | Feature | Status | Branch |
 |---|---|---|
-| 1-core-data-model | stories-merged | feature/1-core-data-model |
+| 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | approved | |
 | 3-obligation-and-permissibility-queries | approved | |
 | 4-hohfeldian-grounding | approved | |
@@ -231,8 +231,17 @@ status: <!-- unpublished | built | published | failed -->
   `1-propositional-core-types.md` → `1-DONE-propositional-core-types.md` with `DONE - ` inserted in
   its title. Feature `1-core-data-model` stays `branched` — stories 2 and 3 (`2-hohfeldian-norm-and-relation`,
   `3-json-round-trip`) are still only `approved`, not started.
+- Stories 2 and 3 completed (Stage A → Stage B → PR → merge each), same pattern as story 1. All three
+  merged; feature `1-core-data-model` set `stories-merged`, then epic PR
+  [#5](https://github.com/stefano-bragaglia/deontic-reasoner/pull/5) opened against `main`. Auto-merge
+  path per the branching model: `mergeable=MERGEABLE` (no conflict), required `test` CI check passed,
+  merged via `gh pr merge --merge` — no separate human review needed at this tier, since it only
+  replays already-individually-reviewed story diffs. Feature `1-core-data-model` is now `done`; epic
+  file marked `DONE` (`0-core-data-model.md` → `0-DONE-core-data-model.md`). **First feature of this
+  iteration fully shipped**: `Atom`/`World`/`Rule`/`HardConstraint`/`Relation`/`Norm` +
+  `to_dict`/`from_dict`/`world_to_list`/`world_from_list`, all on `main`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 1-core-data-model to open the epic PR into main (every story merged; this tier auto-merges on
-clean merge + green CI, per the branching model — no separate human review gate needed).
+Run /stage-a 2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion (next
+feature in build order, first story).
