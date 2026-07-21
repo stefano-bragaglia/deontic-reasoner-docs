@@ -54,7 +54,11 @@ parentheses so the two documents stay traceable to each other.
     purportedly delegated), denying the dependent request regardless of the leaf permission's own
     validity. (spec FR-7, R-4)
 14. The system shall apply a configurable closure policy — permissive (unaddressed ⇒ permitted) or
-    prohibitive (unaddressed ⇒ forbidden) — when no norm matches a request at all. (spec FR-8, §3.4)
+    prohibitive (unaddressed ⇒ forbidden) — when no norm matches a request at all. There is **no
+    implicit global default**: if a deployment/engine instance doesn't configure a closure policy, the
+    system shall raise rather than silently pick one, since permissive vs. prohibitive is a
+    safety-relevant choice each deployment must make explicitly. (spec FR-8, §3.4; see *Questions:
+    Default Policies* #2)
 15. The system shall expose an end-to-end permission-resolution pipeline that composes the above in
     order: query candidates → filter by scope → immunity check → consistency check → resolve conflicts
     (or escalate) → validate delegation chain → decide, returning `PERMIT` (with attached obligations and
@@ -145,6 +149,9 @@ instances by hand, if that's more convenient for their integration.
    explicitly every time (raise if omitted, since the implementation spec's `ReasonerEngine.closure`
    defaults to `None` meaning "must be explicit"), or should there be a global fallback default — and if
    so, permissive or prohibitive?*
+   _A: Raise if omitted — no implicit default. Closure has real safety consequences (a general-purpose
+   assistant and a money-moving agent need opposite defaults), so every deployment must state its choice
+   explicitly rather than silently inheriting one._
 
 ## Questions: Built-in Semantics
 
