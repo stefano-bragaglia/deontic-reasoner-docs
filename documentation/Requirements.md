@@ -49,7 +49,10 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
     automatically from a `delegated(delegatee, delegator, norm)` fact, via the same conditional-rule
     mechanism as requirement 3 — no separate mechanism. (feature 12)
 13. The system shall evaluate `scope_matches(norm, request) -> bool` for temporal/context/condition
-    applicability, so an expired or out-of-context norm does not apply to a given request. (feature 13)
+    applicability, so an expired or out-of-context norm does not apply to a given request. Evaluation
+    resolves `(predicate_name, args)` pairs through a fixed, engine-owned predicate registry, per NFR 3
+    — never `eval()`/`exec()`/`ast.literal_eval` on request data. (feature 13; see *Questions: Scope
+    Evaluation* #3)
 14. The system shall forward-chain a rule set to a fixed point, wrapped *around* the query engine
     (requirements 1–13), to derive: (a) new norm facts created by a power's exercise, and (b)
     delegation's derived obligations (requirement 12) — repeating until no new fact is derived, or a
@@ -148,6 +151,15 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
    mapping from predicate name to evaluator, as considered in an earlier round)? The no-`eval()`/`exec()`
    requirement on condition evaluation (NFR 3) applies regardless of which framework sits underneath, so
    this needs an answer independent of the dyadic/preferential pivot.*
+   _A: Same surface. `scope_matches(norm, request)` resolves through a fixed, engine-owned registry
+   mapping predicate name to a Python callable, applied to `(predicate_name, args)` pairs — never a
+   string evaluated via `eval()`/`exec()`/`ast.literal_eval` — applied to a norm's temporal/context/
+   condition scope instead of a bare `Condition` object. This is a trust-boundary requirement about
+   externally-supplied request data, not about which deontic-logic framework computes obligation/
+   permission, so it carries over unchanged from the earlier design. SymPy's expression/logic parsing
+   remains the one sanctioned fallback if the flat registry ever proves insufficient for richer condition
+   expressions — now even less likely to be needed, since the adopted core requires no SAT solving at
+   all._
 
 ## Questions: Scenario Coverage
 
