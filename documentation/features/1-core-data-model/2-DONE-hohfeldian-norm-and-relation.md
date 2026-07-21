@@ -1,4 +1,4 @@
-# 2. Hohfeldian Norm and Relation
+# 2. DONE - Hohfeldian Norm and Relation
 
 ## What it does
 
