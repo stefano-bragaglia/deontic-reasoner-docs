@@ -41,6 +41,9 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Story | Branch | Status |
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
+| 1-core-data-model | 1-propositional-core-types | | approved |
+| 1-core-data-model | 2-hohfeldian-norm-and-relation | | approved |
+| 1-core-data-model | 3-json-round-trip | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -110,8 +113,14 @@ status: <!-- unpublished | built | published | failed -->
   feature is needed (weighted-count preference in feature 2 handles that directly). All nine adapted
   worked scenarios (§14.1–14.9) are assigned across features 3, 4, 5, and 6. No epic branches yet —
   created lazily by `/stage-a` per `CLAUDE.md → Branching Model`.
+- `1-core-data-model` broken into 3 approved stories (propositional core types, Hohfeldian
+  norm/relation, JSON round-trip) — deliberately data-only, no evaluation behavior (`violates`,
+  hard-constraint exclusion) leaks in here; that's `2-preference-ordering-and-best-worlds`'s job.
+  `Rule.head` is a `frozenset[Atom]` (conjunction), not a single `Atom` like the interaction model's
+  illustrative example — needed by a couple of the adapted worked scenarios, AND-only, no formula parser.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories <feature> for each feature, one at a time, in build order — starting with
-/stories 1-core-data-model. /stage-a does not start until every feature has an approved story breakdown.
+Run /stories 2-preference-ordering-and-best-worlds next (remaining: 2 through
+6-forward-chaining-and-delegation) — /stage-a does not start until every feature has an approved story
+breakdown.
