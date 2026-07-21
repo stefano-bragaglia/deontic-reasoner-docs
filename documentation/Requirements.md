@@ -30,7 +30,11 @@ parentheses so the two documents stay traceable to each other.
    hanging). (spec FR-2, NFR-4)
 5. The system shall derive the correlative obligations of a delegation grant automatically — audit duty,
    dyadic revoke-on-violation duty, and liability — from a single `delegate(A, B, permission)` fact, with
-   no manual authoring of the derived norms. (spec FR-2, §6.2)
+   no manual authoring of the derived norms. (spec FR-2, §6.2) Core delegation handling shall also
+   automatically enforce scope-narrowing: a re-delegated scope is intersected with the delegator's own
+   scope, so a delegatee can never end up with a wider scope than its delegator held — this is built-in
+   engine behavior, not an opt-in rule a domain must remember to add. (spec §14.7; see *Questions:
+   Built-in Semantics* #4)
 6. The system shall support scoped norms (temporal validity, execution context, registered conditions)
    and evaluate scope at **decision time**, not only at derivation time, since a norm can expire between
    being derived and being queried. (spec FR-3, R-5)
@@ -172,6 +176,9 @@ instances by hand, if that's more convenient for their integration.
 4. *Q: Should scope-narrowing on re-delegation (a delegatee's granted scope must be a subset of the
    delegator's own scope, never wider — worked example §14.7 in the implementation spec) be enforced
    automatically by the engine's core delegation handling, or left as an example/opt-in rule?*
+   _A: Automatic and built-in, consistent with the correlatives decision (#3) — core delegation handling
+   always intersects a re-delegated scope with the delegator's own, rejecting or narrowing any widened
+   re-delegation, with no per-domain opt-in required._
 5. *Q: Is true fact retraction (actually removing a previously-asserted fact from working memory) needed
    in this iteration, or is the implementation spec's append-only model sufficient — i.e. revocation and
    expiry are represented by new facts plus time/condition-scoping rather than deleting old facts (which

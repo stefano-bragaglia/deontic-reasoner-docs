@@ -23,7 +23,6 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
-- [ ] Q: Is scope-narrowing on re-delegation enforced automatically by the engine, or opt-in? (#4)
 - [ ] Q: Is true fact retraction needed this iteration, or is append-only (spec's model) sufficient? (#5)
 - [ ] Q: Adopt the implementation spec's nine worked test scenarios (§14.1–14.9) as acceptance criteria as-is? (#6)
 
