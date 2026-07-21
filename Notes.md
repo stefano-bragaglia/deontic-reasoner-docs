@@ -23,7 +23,6 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
-- [ ] Q: Default combining algorithm when none specified — system default or require explicit? (see documentation/Requirements.md → Questions: Default Policies #1)
 - [ ] Q: Default closure policy when none specified — raise, or a global fallback (permissive/prohibitive)? (#2)
 - [ ] Q: Are the four Hohfeldian correlative derivations auto-applied built-in rules, or opt-in building blocks? (#3)
 - [ ] Q: Is scope-narrowing on re-delegation enforced automatically by the engine, or opt-in? (#4)

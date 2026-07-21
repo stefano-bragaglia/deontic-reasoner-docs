@@ -39,7 +39,10 @@ parentheses so the two documents stay traceable to each other.
    (an unsat core) responsible for the conflict, not merely a true/false result. (spec FR-6)
 10. The system shall resolve a detected conflict via a named, swappable combining algorithm — at minimum
     deny-overrides, permit-overrides, first-applicable, and priority-weighted — selectable per
-    domain/resource-class rather than hardcoded globally. (spec FR-5, §8.1)
+    domain/resource-class rather than hardcoded globally. If a call site doesn't specify one, the system
+    shall default to **deny-overrides** (matching the source PDF's "prohibition beats permission") rather
+    than raising an error — an unspecified conflict resolves toward denial, not silently toward access.
+    (spec FR-5, §8.1; see *Questions: Default Policies* #1)
 11. The system shall check immunity **before** invoking any combining algorithm: an immunity-protected
     normative position can never be overridden by ordinary conflict resolution, regardless of what a
     combining algorithm would otherwise decide. (spec §8.2)
@@ -135,6 +138,9 @@ instances by hand, if that's more convenient for their integration.
    should the engine apply a system-wide default (e.g. deny-overrides, matching the source PDF's
    "prohibition beats permission"), or should every call site be required to specify one explicitly
    (raising an error if omitted)?*
+   _A: System default is deny-overrides, matching the source PDF's "prohibition beats permission." A
+   caller may still override it per call/domain, but omitting it is not an error — it resolves toward
+   denial._
 2. *Q: When a caller doesn't specify a closure policy for a request, should the engine require it
    explicitly every time (raise if omitted, since the implementation spec's `ReasonerEngine.closure`
    defaults to `None` meaning "must be explicit"), or should there be a global fallback default — and if
