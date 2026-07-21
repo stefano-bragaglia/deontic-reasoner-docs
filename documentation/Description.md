@@ -130,13 +130,52 @@ represented.
 1. Is `Rule.weight` (feature #3) a plain value the norm-author sets directly, or does it need the same
    "only the granting authority sets it" trust-boundary treatment considered for `Norm.priority` in an
    earlier round?
+   _A: Same treatment, for the same reason. `Rule.weight` plays the identical role in `best_worlds`'s
+   weighted-count preference ordering that `Norm.priority` played in the earlier `PriorityWeighted`
+   combining algorithm — both are the single number deciding which competing norm wins — so the earlier
+   governance risk applies unchanged: nothing in the query engine itself stops a delegatee from
+   asserting a rule with an inflated weight to out-rank restrictions imposed by its delegator. Weight
+   must be set by the rule's granting/authoring authority at authoring time (the same actor recorded in
+   a norm's provenance), never mutable by the rule's own subject-agent. This is a requirement on
+   whatever stores/authors rules, out of scope for the reasoning engine itself to enforce, exactly as it
+   was scoped before._
 2. What's the exact `World`/atom representation (e.g. `frozenset[str]` of true atoms vs.
    `Mapping[str, bool]` over a fixed atom universe), and how does `best_worlds` enumerate worlds
    tractably for a given antecedent without naively generating the full 2^n truth-table space?
+   _A: No primary source documents the reference Solver's actual algorithm (its ingested source is
+   README text only, silent on internal implementation/complexity). For representation,
+   `frozenset[str]` of true atoms is the better fit of the two options: directly hashable and immutable,
+   matching the `frozen=True, slots=True` convention already adopted for `Fact`/`Norm` specifically
+   because both need to live in `set`s — a `Mapping[str, bool]` isn't hashable without extra work and
+   adds no expressiveness a frozenset of true atoms lacks. For tractable enumeration, no source states
+   an algorithm for the KLM solver either, but the same scoping principle already used for an analogous
+   tractability problem (partitioning SAT consistency checks by `(subject, resource)` rather than
+   checking globally) generalizes here: only atoms actually mentioned in the loaded rule set or the
+   antecedent formula can affect which world is preferred, so enumeration is scoped to that atom set,
+   not the full global vocabulary — this is this vault's own extrapolation from the SAT-scoping pattern,
+   not a sourced claim about the reference Solver's implementation._
 3. How does `scope_matches` relate to a predicate-registry-style design (the no-`eval()`/`exec()`
    requirement on condition evaluation still applies regardless of which framework sits underneath)?
+   _A: Same surface. `scope_matches(norm, request)` resolves through a fixed, reasoner-owned registry of
+   `(predicate_name, args)` pairs resolved against Python callables — never a string evaluated via
+   `eval()`/`exec()`, since a norm's condition data can ultimately trace back to an untrusted agent's
+   request. This is a trust-boundary requirement about externally-supplied data, not about which
+   deontic-logic framework sits underneath, so it carries over unchanged from the SAT-based design to
+   the preferential-dyadic core. SymPy's expression/logic parsing remains the one sanctioned fallback if
+   the flat registry ever proves insufficient for richer condition expressions — now even less likely to
+   be needed, since the adopted core requires no SAT solving at all._
 4. Are hard constraints (feature #4) actually needed by this iteration's worked scenarios, or are they
    infrastructure to keep in reserve until a genuinely-impossible-state case shows up?
+   _A: Reserve infrastructure — none of the previously worked-out agentic test scenarios (scope expiry,
+   directed right/duty obligations, delegation-derived contrary-to-duty obligations, a conflict resolved
+   by priority, a broken delegation chain, a power exercise and an immunity block, scope-narrowing on
+   re-delegation, the Chisholm-paradox regression test, and the deontic-explosion regression test)
+   describes a genuinely *impossible* state — every one is naturally modeled as a violated-but-not-
+   excluded rule, resolved by the preference ordering rather than by ruling a world out entirely. Hard
+   constraints are nonetheless real, separate machinery in the reference Solver itself (`!formula`
+   lines, distinct from weighted conditional rules), not something this vault invented, so they belong
+   in the minimal feature set as documented — just unexercised by the current scenario set until a case
+   genuinely calling for an impossible (not merely disfavored) state appears._
 
 ## Tech stack
 

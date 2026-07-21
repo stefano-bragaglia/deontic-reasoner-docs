@@ -92,6 +92,10 @@ status: <!-- unpublished | built | published | failed -->
   preference semantics, scenario-by-scenario; powers need no dedicated predicate (an ordinary
   domain-specific fact as a conditional rule's body suffices, generalizing delegation's own mechanism);
   `Relation.IMMUNITY` is purely representational this iteration, no short-circuit behavior yet.
+- `Description.md`'s own `## Open questions` section (4 items, a subset of `Requirements.md`'s 7) now
+  also carries `_A:_` answers in place, matching the resolutions already recorded in `Requirements.md` —
+  kept both documents internally consistent rather than leaving `Description.md`'s questions dangling
+  unanswered after `Requirements.md` settled them.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
