@@ -193,9 +193,24 @@ status: <!-- unpublished | built | published | failed -->
   stays `false` — `:param:`-documented attributes aren't machine-checked for per-field completeness,
   only the class-level docstring's existence is (`ruff` D101). No code change needed: `models.py`
   already used `:param:` in its class docstrings.
+- **Branching correction**: the docstring-enforcement infra (pyproject.toml config, `pydoclint`
+  dependency, `ci.yml` step, `__init__.py`/`check_file_coverage.py` docstrings) had been committed
+  directly onto `story/1-core-data-model/1-propositional-core-types` — wrong, since it's project-wide
+  tooling, not story-1-specific work, and doesn't belong bundled into that story's own PR. Corrected
+  without rewriting any existing history (no force-push): recreated the same infra changes fresh on a
+  new `chore/docstring-enforcement` branch off `main` (models.py doesn't exist on `main` yet, so the
+  earlier commit couldn't be cherry-picked as-is), opened
+  [PR #2](https://github.com/stefano-bragaglia/deontic-reasoner/pull/2) against `main` directly — the
+  user will approve/merge it. On the story branch, `git revert`ed the misplaced commit (forward-only,
+  PR #1 is back to just `models.py` + `test_models_core.py`, verified via `gh pr diff 1 --name-only`).
+  **Follow-up once PR #2 merges**: fast-forward `feature/1-core-data-model` to the new `main`, merge it
+  into the story branch, then re-add docstrings to `Rule`/`HardConstraint` in `models.py` as a fresh,
+  properly-scoped commit (the content was reverted along with the infra, but the classes will need it
+  again once the merged-in `pyproject.toml` starts requiring it).
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/1 (story PR into
-feature/1-core-data-model); on merge, mark it done and move to
-/stage-a 1-core-data-model/2-hohfeldian-norm-and-relation.
+Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/2 (docstring-enforcement
+infra into main) and https://github.com/stefano-bragaglia/deontic-reasoner/pull/1 (story PR into
+feature/1-core-data-model, now correctly scoped); once PR #2 merges, sync feature/1-core-data-model and
+the story branch with the new main, re-add models.py docstrings, then continue.
