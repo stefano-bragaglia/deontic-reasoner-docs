@@ -27,7 +27,11 @@ parentheses so the two documents stay traceable to each other.
 4. The system shall forward-chain from a set of ground facts and norms to a fixed point: matching rules
    against working memory, firing them, collecting newly derived facts/norms, and repeating until no new
    facts are derived or a `max_iterations` cap is hit (raising an explicit exception rather than
-   hanging). (spec FR-2, NFR-4)
+   hanging). (spec FR-2, NFR-4) Working memory is **append-only**: this iteration does not require true
+   fact retraction. Revocation and expiry are represented by asserting new facts (e.g. a `revoked(...)`
+   fact) and checking scope/conditions at decision time, never by deleting a previously-asserted fact —
+   this both preserves the audit trail (req. 16) and keeps derivation monotonic, which the termination
+   argument (NFR-4) relies on. (see *Questions: Built-in Semantics* #5)
 5. The system shall derive the correlative obligations of a delegation grant automatically — audit duty,
    dyadic revoke-on-violation duty, and liability — from a single `delegate(A, B, permission)` fact, with
    no manual authoring of the derived norms. (spec FR-2, §6.2) Core delegation handling shall also
@@ -183,6 +187,16 @@ instances by hand, if that's more convenient for their integration.
    in this iteration, or is the implementation spec's append-only model sufficient — i.e. revocation and
    expiry are represented by new facts plus time/condition-scoping rather than deleting old facts (which
    also keeps the audit trail intact)?*
+   _A: Minimal — append-only, no true retraction. This isn't a simplification made at the expense of
+   correctness: append-only **is** the correct semantics for permission governance. Revoking access must
+   not erase the fact that access was once granted — both "granted at T1" and "revoked at T2" need to
+   coexist for the audit trail (req. 16) to mean anything. True retraction would only be needed for a
+   genuinely different feature — answering "what would today look like if a past grant had never
+   happened," a retroactive/counterfactual rule-change question that belongs to legal-history-style
+   reasoning, not agent-permission governance, and isn't required here. If it's ever needed, the cheap
+   escape hatch is constructing a fresh `ReasonerEngine` from a corrected fact set and re-running it,
+   rather than building live retraction into a running engine — which would also break the fixed-point
+   termination argument's monotonicity assumption (spec §6.3)._
 
 ## Questions: Testing Scope
 
