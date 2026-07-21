@@ -163,6 +163,22 @@ status: <!-- unpublished | built | published | failed -->
   fixed-point convergence is made real, not just claimed, by grounding every norm *before* applying
   power exercises within each iteration, so a newly-exercised norm's own correlative is deferred to the
   next round — tested explicitly in story 4.
+- **Quality gate added, at the user's request**: docstrings are now enforced on `project/src/` — every
+  module/class/function needs a docstring (`ruff`'s `D` rules, `pep257` convention), and every function
+  parameter needs an actual reST `:param:` description, not just a type (`pydoclint`, `style=sphinx`).
+  Root cause of the user's "I think it disappeared" observation: `ruff`'s own `D417` rule (missing
+  argument descriptions) only recognizes Google/NumPy-style docstring sections — it silently never fires
+  on Sphinx-style `:param:` field lists, confirmed by direct testing, so `ruff` alone could never have
+  enforced this regardless of configuration; `pydoclint` was added specifically to close that gap.
+  `tests/` is exempt (self-descriptive by name) and dataclass per-attribute checking is off
+  (`check-class-attributes = false` — dataclasses have no explicit `__init__` in source for content-
+  matching to key off; class-level docstrings are still required). Retrofitted `src/deontic_reasoner/{__init__,models}.py`
+  and `scripts/check_file_coverage.py` to comply; added to both the local pre-commit hook and
+  `ci.yml`. Separately discovered and disclosed to the user: `.git/hooks/` is never tracked by git
+  (structurally excluded, not a `.gitignore` matter) — the pre-commit hook has been local-only on this
+  machine since `/setup`; this fix (and any future hook edit) needs manual reapplication on any other
+  clone. Not restructured into a tracked wrapper script — out of scope of what was asked, flagged here
+  in case it's wanted later.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
