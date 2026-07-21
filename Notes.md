@@ -30,7 +30,7 @@ status: <!-- unpublished | built | published | failed -->
 <!-- stories-merged: every story for this feature is `merged`, but the epic PR into main isn't open yet -->
 | Feature | Status | Branch |
 |---|---|---|
-| 1-core-data-model | branched | feature/1-core-data-model |
+| 1-core-data-model | stories-merged | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | approved | |
 | 3-obligation-and-permissibility-queries | approved | |
 | 4-hohfeldian-grounding | approved | |
@@ -43,7 +43,7 @@ status: <!-- unpublished | built | published | failed -->
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
-| 1-core-data-model | 3-json-round-trip | story/1-core-data-model/3-json-round-trip | pr-open |
+| 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
@@ -234,6 +234,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/4 (story PR into
-feature/1-core-data-model, last story of this feature); on merge, every story for 1-core-data-model is
-merged, so set the feature to stories-merged and run /pr 1-core-data-model for the epic PR into main.
+Run /pr 1-core-data-model to open the epic PR into main (every story merged; this tier auto-merges on
+clean merge + green CI, per the branching model — no separate human review gate needed).
