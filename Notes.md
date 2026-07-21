@@ -42,7 +42,7 @@ status: <!-- unpublished | built | published | failed -->
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
-| 1-core-data-model | 2-hohfeldian-norm-and-relation | story/1-core-data-model/2-hohfeldian-norm-and-relation | code |
+| 1-core-data-model | 2-hohfeldian-norm-and-relation | story/1-core-data-model/2-hohfeldian-norm-and-relation | pr-open |
 | 1-core-data-model | 3-json-round-trip | | approved |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
@@ -234,5 +234,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 1-core-data-model/2-hohfeldian-norm-and-relation to open this story's PR against
-feature/1-core-data-model (all gates green, 100% coverage).
+Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/3 (story PR into
+feature/1-core-data-model); on merge, mark it done and move to
+/stage-a 1-core-data-model/3-json-round-trip.
