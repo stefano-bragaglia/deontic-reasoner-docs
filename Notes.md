@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-stories
+onboarding
 
 ## Project
 name: deontic-reasoner
@@ -28,36 +28,11 @@ status: <!-- unpublished | built | published | failed -->
 <!-- status: proposed | approved | branched | stories-merged | pr-open | done -->
 <!-- branched: epic branch created lazily by /stage-a on that feature's first story, not by /features -->
 <!-- stories-merged: every story for this feature is `merged`, but the epic PR into main isn't open yet -->
-| Feature | Status | Branch |
-|---|---|---|
-| 1-core-data-model | approved | |
-| 2-forward-chaining-engine | approved | |
-| 3-hohfeldian-and-delegation-semantics | approved | |
-| 4-condition-and-scope-evaluation | approved | |
-| 5-conflict-detection | approved | |
-| 6-conflict-resolution | approved | |
-| 7-delegation-chain-validation | approved | |
-| 8-permission-resolution-pipeline | approved | |
 
 ## Stories
 | Feature | Story | Branch | Status |
 |---------|-------|--------|--------|
 <!-- status: proposed | approved | tests | code | pr-open | merged -->
-| 1-core-data-model | 1-core-enums-and-identifiers | | approved |
-| 1-core-data-model | 2-working-memory-fact | | approved |
-| 1-core-data-model | 3-norm-support-value-types | | approved |
-| 1-core-data-model | 4-norm | | approved |
-| 1-core-data-model | 5-json-round-trip | | approved |
-| 2-forward-chaining-engine | 1-rule-representation-and-pattern-matching | | approved |
-| 2-forward-chaining-engine | 2-fixed-point-loop-and-termination | | approved |
-| 2-forward-chaining-engine | 3-rule-firing-audit-trail | | approved |
-| 3-hohfeldian-and-delegation-semantics | 1-norm-registration-and-correlative-rule | | approved |
-| 3-hohfeldian-and-delegation-semantics | 2-engine-factory-with-builtins | | approved |
-| 3-hohfeldian-and-delegation-semantics | 3-delegation-grant-with-scope-narrowing | | approved |
-| 3-hohfeldian-and-delegation-semantics | 4-delegation-obligations | | approved |
-| 4-condition-and-scope-evaluation | 1-predicate-registry | | approved |
-| 4-condition-and-scope-evaluation | 2-scope-evaluation-at-decision-time | | approved |
-| 4-condition-and-scope-evaluation | 3-dyadic-norm-activation | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -80,42 +55,20 @@ status: <!-- unpublished | built | published | failed -->
   `project/.git/hooks/pre-commit` and `project/.github/workflows/ci.yml`.
 - `uv init --package` seeds a `main()`/`[project.scripts]` CLI entry point by default; removed both
   (this is a library per `Description.md`, no CLI planned for this iteration).
-- Requirements Q&A resolved (full detail + rationale in `documentation/Requirements.md → Questions`):
-  default combining algorithm is deny-overrides (not an error if omitted); closure policy has no implicit
-  default (raises if omitted — safety-relevant, must be explicit per deployment); the four Hohfeldian
-  correlative derivations and delegation scope-narrowing are both automatic, built-in engine behavior, not
-  opt-in rules; working memory is append-only, no true fact retraction this iteration (revocation is a
-  new fact + scope/condition checks, preserving the audit trail and keeping derivation monotonic); the
-  implementation spec's nine worked test scenarios (§14.1–14.9) are adopted as-is as acceptance criteria
-  for `/features`/`/stories` to map onto.
-- Eight features approved (`documentation/features/1-core-data-model` through
-  `8-permission-resolution-pipeline`), numbered in dependency/build order; each of the implementation
-  spec's nine worked scenarios (§14.1–14.9) is assigned to exactly one feature as its acceptance
-  criteria. No epic branches yet — created lazily by `/stage-a` per `CLAUDE.md → Branching Model`.
-- `1-core-data-model` broken into 5 approved stories (enums/identifiers, Fact, Norm-support value types,
-  Norm, JSON round-trip). Deliberate deviation from the implementation spec: dropped the spec's
-  `attributes: Mapping` field from `Agent`/`Resource` (unused by any requirement, and would break the
-  frozen dataclasses' required hashability).
-- `2-forward-chaining-engine` broken into 3 approved stories (pattern matching, fixed-point loop,
-  audit trail). Judgment call recorded in story 3: the audit log records every successful rule firing,
-  including ones that only reconfirm an already-known fact, not only firings that add something new.
-- User correction: `/stage-a` must not start until **every** feature has an approved story breakdown,
-  not just the first one worked. See global memory `feedback_stories-before-stage-a`.
-- `3-hohfeldian-and-delegation-semantics` broken into 4 approved stories (correlative rule, engine
-  factory, delegation grant with scope-narrowing, delegation obligations). Key design resolution: pattern
-  matching alone can't branch on `Norm.relation`, so the four correlatives are one rule doing Python
-  dispatch in its consequent, not four declaratively-matched rules. Also: full §14.8 (Chisholm's
-  paradox) verification is NOT delivered by this feature alone — it only represents the dyadic
-  revoke-on-violation norm correctly; evaluating whether `given` currently holds is
-  `4-condition-and-scope-evaluation`'s job. The epic file's original §14.8 assignment to this feature is
-  therefore only partial; left as-is (epics are append-only) but noted here for when `4-condition-and-scope-evaluation`'s
-  stories are written.
-- `4-condition-and-scope-evaluation` broken into 3 approved stories (predicate registry, scope
-  evaluation, dyadic norm activation). Story 3 (`3-dyadic-norm-activation`) is what actually closes out
-  full §14.8 (Chisholm's paradox) coverage that `3-hohfeldian-and-delegation-semantics` deliberately left
-  unfinished. Unregistered predicates raise `UnknownPredicateError` rather than defaulting silently.
+- User correction (still valid, applies to whatever the next iteration through this project looks
+  like): `/stage-a` must not start until **every** feature has an approved story breakdown, not just the
+  first one worked. See global memory `feedback_stories-before-stage-a`.
+- **Reset**: at the user's explicit request, deleted `documentation/Requirements.md` and all of
+  `documentation/features/` (8 approved epics and 19 approved stories across them) to go back and revise
+  `Description.md` first. Phase reset to `onboarding`. `documentation/references/` (the PDF, the
+  implementation spec, `External-Links.md`) and `project/`'s scaffold from `/setup` are untouched — only
+  the requirements/features/stories layer was removed, since it all derives from the description that's
+  now being revised. The prior decisions above (SymPy-vs-stdlib resolution, `/setup` specifics) remain
+  valid facts independent of this reset; the Requirements Q&A and feature/story-specific decisions that
+  were here previously were removed since they referenced documents that no longer exist — see git
+  history on the docs repo if that reasoning is ever needed again.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories 5-conflict-detection next (remaining: 5 through 8-permission-resolution-pipeline) —
-/stage-a does not start until every feature has an approved story breakdown.
+Waiting on the user for what to change in documentation/Description.md; once known, revise it, present
+for approval, then re-run /requirements -> /features -> /stories from scratch.
