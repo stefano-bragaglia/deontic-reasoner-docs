@@ -23,7 +23,6 @@ status: <!-- unpublished | built | published | failed -->
 ## Open Questions
 <!-- Add a question when blocked. Clear (delete the line) when answered. -->
 <!-- Format: - [ ] Q: <question> / A: <answer> -->
-- [ ] Q: Are hard constraints actually needed by this iteration's scenarios? (#4)
 - [ ] Q: Which worked scenarios ground this iteration's acceptance criteria? (#5)
 - [ ] Q: How is a power's exercise represented as a triggering fact? (#6)
 - [ ] Q: Does Relation.IMMUNITY need any special semantic treatment this iteration? (#7)

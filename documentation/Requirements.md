@@ -22,7 +22,9 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
    under `best_worlds`'s weighted-count ordering (requirement 6). (feature 3; see *Questions: Trust and
    Governance* #2)
 4. The system shall represent **hard constraints** — formulas whose violation excludes a world from
-   consideration entirely, distinct from a rule violation (which merely disprefers a world). (feature 4)
+   consideration entirely, distinct from a rule violation (which merely disprefers a world). Kept in the
+   requirement set as real, separate machinery (not a rule with infinite weight), but not exercised by
+   any of this iteration's worked scenarios — see *Questions: Scenario Coverage* #4. (feature 4)
 5. The system shall implement `violates(rule, world) -> bool`: does this world make the rule's body true
    but its head false? (feature 5)
 6. The system shall implement `preferred(world_a, world_b) -> bool` under a **configurable** criterion
@@ -166,6 +168,15 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
 4. *Q: Are hard constraints (feature 4 / requirement 4) actually needed by this iteration's worked
    scenarios, or are they infrastructure to keep in reserve until a genuinely-impossible-state case
    actually shows up?*
+   _A: Reserve infrastructure. None of the agentic scenarios worked out so far (scope expiry, directed
+   right/duty obligations, delegation-derived contrary-to-duty obligations, a conflict resolved by
+   preference weight, a broken delegation link, a power exercise, scope-narrowing on re-delegation, the
+   Chisholm-paradox regression, the deontic-explosion regression) describes a genuinely *impossible*
+   state — every one is naturally modeled as a violated-but-not-excluded rule, resolved by the preference
+   ordering rather than by ruling a world out entirely. Hard constraints remain in the requirement set
+   as specified (they're real, separate machinery in the reference Solver itself — `!formula` lines,
+   distinct from weighted conditional rules) — just unexercised by the current scenario set until a
+   genuinely-impossible-state case is added._
 5. *Q: Which worked test scenarios ground this iteration's acceptance criteria? The previous pass at
    this project adopted the fuller implementation spec's nine worked scenarios (§14.1–14.9) wholesale,
    but several of them assumed machinery this iteration no longer builds (SAT-based
