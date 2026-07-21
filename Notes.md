@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-onboarding
+requirements
 
 ## Project
 name: deontic-reasoner
@@ -77,9 +77,12 @@ status: <!-- unpublished | built | published | failed -->
   valid facts independent of this reset; the Requirements Q&A and feature/story-specific decisions that
   were here previously were removed since they referenced documents that no longer exist — see git
   history on the docs repo if that reasoning is ever needed again.
+- `Description.md` re-synthesized via `/describe` into the skill's required structure (Purpose/Inputs
+  and outputs/Key behaviours/Out of scope/Open questions/Tech stack) and approved by the user as-is, no
+  changes requested. Content is the same minimal Preferential Dyadic Deontic Logic framework from the
+  prior pivot, now explicit that the MCP server is deferred to a separate later iteration.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-documentation/Description.md has been rewritten around the minimal Preferential Dyadic Deontic Logic
-framework — present it to the user for approval; once approved, re-run /requirements -> /features ->
-/stories from scratch.
+Run /requirements to derive formal requirements from the approved documentation/Description.md (13
+predicates: propositional core + Hohfeldian agentic extension layer).
