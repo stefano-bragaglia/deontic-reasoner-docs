@@ -89,4 +89,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 1-core-data-model/1-core-enums-and-identifiers (first story, no dependencies).
+Run /stories for each remaining feature (2-forward-chaining-engine through
+8-permission-resolution-pipeline), one at a time — /stage-a does not start until every feature has an
+approved story breakdown.
