@@ -48,6 +48,9 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 3-norm-support-value-types | | approved |
 | 1-core-data-model | 4-norm | | approved |
 | 1-core-data-model | 5-json-round-trip | | approved |
+| 2-forward-chaining-engine | 1-rule-representation-and-pattern-matching | | approved |
+| 2-forward-chaining-engine | 2-fixed-point-loop-and-termination | | approved |
+| 2-forward-chaining-engine | 3-rule-firing-audit-trail | | approved |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -86,9 +89,14 @@ status: <!-- unpublished | built | published | failed -->
   Norm, JSON round-trip). Deliberate deviation from the implementation spec: dropped the spec's
   `attributes: Mapping` field from `Agent`/`Resource` (unused by any requirement, and would break the
   frozen dataclasses' required hashability).
+- `2-forward-chaining-engine` broken into 3 approved stories (pattern matching, fixed-point loop,
+  audit trail). Judgment call recorded in story 3: the audit log records every successful rule firing,
+  including ones that only reconfirm an already-known fact, not only firings that add something new.
+- User correction: `/stage-a` must not start until **every** feature has an approved story breakdown,
+  not just the first one worked. See global memory `feedback_stories-before-stage-a`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stories for each remaining feature (2-forward-chaining-engine through
-8-permission-resolution-pipeline), one at a time — /stage-a does not start until every feature has an
-approved story breakdown.
+Run /stories 3-hohfeldian-and-delegation-semantics next (remaining: 3 through
+8-permission-resolution-pipeline) — /stage-a does not start until every feature has an approved story
+breakdown.
