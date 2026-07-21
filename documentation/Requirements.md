@@ -10,8 +10,10 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
 
 1. The system shall represent **atoms** as the base propositional vocabulary the whole system is built
    from. (feature 1)
-2. The system shall represent **worlds** as truth assignments over atoms — finite assignments, not a
-   general Kripke frame. (feature 2)
+2. The system shall represent **worlds** as `World = frozenset[str]` — the set of atoms true at that
+   world (finite assignments, not a general Kripke frame). This representation is hashable and immutable
+   by construction, matching the `frozen=True, slots=True` convention used elsewhere for types that must
+   live in `set`s. (feature 2; see *Questions: Data Representation* #1)
 3. The system shall represent **conditional rules** as `(body, head, weight)` triples — the norm
    representation. An empty/trivial body is an unconditional (default) obligation. (feature 3)
 4. The system shall represent **hard constraints** — formulas whose violation excludes a world from
@@ -22,7 +24,11 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
    over each world's violated-rule set — at minimum subset/Pareto, count, and weighted count — defaulting
    to **weighted count** when none is specified. (feature 6)
 7. The system shall implement `best_worlds(antecedent) -> set[World]`: the most-preferred worlds (under
-   requirement 6) among those satisfying a given antecedent formula. (feature 7)
+   requirement 6) among those satisfying a given antecedent formula. Enumeration shall be scoped to the
+   atoms actually mentioned in the currently-loaded rule set or the antecedent formula, not the full
+   power set over every atom the system has ever seen — an atom appearing in neither cannot affect which
+   world is preferred and is marginalized out. (feature 7; see *Questions: Data Representation* #1 — this
+   scoping approach is this vault's own extrapolation, not documented in any ingested source)
 8. The system shall implement the **obligation query**: `b` is obligatory given `a` iff `b` holds at
    *every* world in `best_worlds(a)`. (feature 8)
 9. The system shall implement the **permissibility query**: `b` is permitted given `a` iff `b` holds at
@@ -62,8 +68,9 @@ layer wrapped around it. Where a requirement below corresponds to one of the num
 5. **Bounded termination**: the forward-chaining fixed-point loop (requirement 14) is always capped by a
    maximum iteration count; a rule set that never reaches a fixed point fails loudly rather than hanging.
 6. **Tractability**: `best_worlds`/`preferred` computation must scale reasonably for realistic rule-set
-   sizes — naive enumeration of the full 2^n truth-table space over all atoms must be avoided where a
-   cheaper approach exists (exact tractability strategy is an open question, below).
+   sizes — naive enumeration of the full 2^n truth-table space over all atoms is avoided by scoping
+   enumeration to the atom universe of the currently-loaded rule set/antecedent (requirement 7), not the
+   system's entire atom history.
 7. **Test coverage**: ≥90% coverage, both aggregate and per-file, per this vault's standing project-wide
    quality gate (`CLAUDE.md → Hard Rules`).
 
@@ -104,6 +111,16 @@ be authored as plain JSON/dict literals as well as constructed dataclass instanc
    `Mapping[str, bool]` over a fixed, known atom universe? And how does `best_worlds` enumerate worlds
    tractably for a given antecedent, without naively generating the full 2^n truth-table space over
    every atom in the system?*
+   _A: `World = frozenset[str]` (the true atoms) — hashable and immutable out of the box, matching the
+   `frozen=True, slots=True` convention already used for `Fact`/`Norm` (both need to live in `set`s); a
+   `Mapping[str, bool]` isn't hashable without extra wrapping and adds no expressiveness a frozenset of
+   true atoms lacks. On tractable enumeration: no source documents the reference Solver's actual
+   algorithm (its ingested source is README text only, silent on internal implementation/complexity) —
+   this answer is this vault's own extrapolation, not a sourced claim. Scope the enumerated atom universe
+   to only the atoms actually mentioned in the currently-loaded rule set or the antecedent formula, since
+   an atom appearing in neither cannot affect which world is preferred and can be marginalized out —
+   the same scoping principle previously used for partitioning SAT consistency checks by
+   `(subject, resource)` rather than checking globally, now reapplied to atom-universe scoping instead._
 
 ## Questions: Trust and Governance
 
