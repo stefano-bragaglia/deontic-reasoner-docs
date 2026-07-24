@@ -362,9 +362,26 @@ status: <!-- unpublished | built | published | failed -->
   *would* converge given enough rounds but is deliberately given `max_iterations` too low to finish,
   which is a faithful, achievable reading of "raises `ForwardChainTimeout` once `max_iterations` is
   reached" without requiring genuine non-termination.
+- **Ad-hoc post-completion doc/example work**, at the user's explicit request, outside the normal
+  `/describe → /requirements → /features → /stories` cycle (small, self-contained additions, same
+  pattern already used for the logo and `MANUAL.md` itself — each went through its own small
+  `chore`/`docs` branch + PR rather than direct-to-`main`, per the process-slip correction earlier):
+  added `project/examples/` (4 narrated, runnable scripts — Chisholm's 1963 contrary-to-duty
+  paradox, Forrester's 1984 "Gentle Murderer" paradox, weighted conflict resolution, and a full
+  rights/powers/delegation/forward-chaining multi-agent scenario; every one verified by actually
+  running it, including two math corrections caught only by running the code: Forrester's paradox
+  needed an explicit `HardConstraint` for the same independent-atoms reason as the sent/not_sent
+  case, and a `forward_chain` convergence claim in `MANUAL.md` §6.5 needed 3 iterations, not 2, to
+  actually converge); expanded `MANUAL.md` so every concept in §4/§6 that lacked a runnable example
+  now has one, and made all its snippets self-contained; rewrote `project/README.md` to follow
+  [othneildrew/Best-README-Template](https://github.com/othneildrew/Best-README-Template)'s
+  section structure, with a Roadmap listing PyPI publish, a DSL for authoring rules/norms, a
+  parser for it, a PyCharm syntax-highlighter plugin, a full CLI, and the already-planned MCP
+  server integration. Opened as
+  [PR #28](https://github.com/stefano-bragaglia/deontic-reasoner/pull/28), not yet merged.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Refresh project/README.md (and vault-root README.md if warranted) to reflect the now-complete
-6-forward-chaining-and-delegation capability, then offer /publish — all six features of this
-iteration are merged to main.
+Await user review/merge of PR #28 (docs/examples/README); once merged, pull main and confirm
+project/README.md and MANUAL.md render as expected, then offer /publish — all six features of
+this iteration are already merged to main, this is the last doc polish before that gate.
