@@ -1,4 +1,4 @@
-# 6. Forward Chaining and Delegation
+# 6. DONE - Forward Chaining and Delegation
 
 ## Name
 
