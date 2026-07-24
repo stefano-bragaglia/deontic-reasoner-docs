@@ -58,7 +58,7 @@ status: <!-- unpublished | built | published | failed -->
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
+| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | story/6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop | tests |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -328,7 +328,21 @@ status: <!-- unpublished | built | published | failed -->
   case; every other module in this project remains at 100%. Worth a look if a later story happens to
   touch this path anyway.
 
+- Feature `6-forward-chaining-and-delegation`'s last story (`4-forward-chaining-fixed-point-loop`)
+  fixes the `forward_chain`/`ChainResult`/`ForwardChainTimeout` design: each iteration grounds every
+  norm/delegation currently known (before applying power exercises, so a newly-exercised norm's own
+  correlative defers to the next round), then applies every `power_exercises` entry against norms
+  known at the *start* of that iteration; convergence is "no genuinely new norm was added this
+  iteration" (grounding of an unchanged norm/delegation set is itself idempotent, so norm-set growth
+  is the only thing that can ever change the result). **Reinterpreted "never stabilizes" for
+  criterion 4's test**: since `power_exercises`/`delegations` are a fixed, finite, deterministic
+  input, the norm set is provably bounded (at most one new norm per `power_exercises` entry) — true
+  unbounded growth isn't constructible in this design. The test instead engineers a chain that
+  *would* converge given enough rounds but is deliberately given `max_iterations` too low to finish,
+  which is a faithful, achievable reading of "raises `ForwardChainTimeout` once `max_iterations` is
+  reached" without requiring genuine non-termination.
+
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop (last story of
-the last feature).
+Run /stage-b 6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop (tests written;
+see Decisions for the forward_chain convergence-loop design the implementation must match).
