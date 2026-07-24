@@ -57,7 +57,7 @@ status: <!-- unpublished | built | published | failed -->
 | 5-scope-evaluation | 2-temporal-scope-evaluation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | story/6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing | code |
+| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | story/6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing | pr-open |
 | 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
 
 ## Decisions
@@ -330,5 +330,7 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing to open this
-story's PR against feature/6-forward-chaining-and-delegation (all gates green, 94%+ coverage).
+Await review/merge of [PR #23](https://github.com/stefano-bragaglia/deontic-reasoner/pull/23)
+(3-delegation-grant-with-scope-narrowing); on merge, run the story's on-merge steps, then
+/stage-a 6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop (last story of the
+last feature).
