@@ -54,7 +54,7 @@ status: <!-- unpublished | built | published | failed -->
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | (merged, branch deleted) | merged |
-| 5-scope-evaluation | 2-temporal-scope-evaluation | story/5-scope-evaluation/2-temporal-scope-evaluation | tests |
+| 5-scope-evaluation | 2-temporal-scope-evaluation | story/5-scope-evaluation/2-temporal-scope-evaluation | code |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
@@ -301,7 +301,14 @@ status: <!-- unpublished | built | published | failed -->
   (`2-directed-obligation-regression`) can independently reconstruct/compare atom identity without
   reaching into `grounding.py` internals.
 
+- `pydoclint`'s `DOC502` (a docstring `:raises:` line naming an exception the function body never
+  directly raises) hit for the first time in `scope_matches`: it calls `evaluate_condition`, which can
+  raise `UnknownPredicateError`, but `scope_matches` itself has no `raise` statement — `pydoclint` only
+  checks direct raises, not transitive ones. Fixed by folding the exception mention into the `:return:`
+  prose ("which may itself raise ...") instead of a `:raises:` field. Worth remembering for any future
+  function that only propagates an exception from a callee.
+
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 5-scope-evaluation/2-temporal-scope-evaluation (tests written; add scope_matches to
-scope.py).
+Run /pr 5-scope-evaluation/2-temporal-scope-evaluation to open this story's PR against
+feature/5-scope-evaluation (all gates green, 100% coverage; last story of feature 5).
