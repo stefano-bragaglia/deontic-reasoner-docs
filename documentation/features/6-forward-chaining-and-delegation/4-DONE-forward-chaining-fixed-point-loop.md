@@ -1,4 +1,4 @@
-# 4. Forward-Chaining Fixed-Point Loop
+# 4. DONE - Forward-Chaining Fixed-Point Loop
 
 ## What it does
 

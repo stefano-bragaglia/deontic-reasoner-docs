@@ -35,7 +35,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
 | 5-scope-evaluation | done | feature/5-scope-evaluation |
-| 6-forward-chaining-and-delegation | branched | feature/6-forward-chaining-and-delegation |
+| 6-forward-chaining-and-delegation | stories-merged | feature/6-forward-chaining-and-delegation |
 
 ## Stories
 | Feature | Story | Branch | Status |
@@ -58,7 +58,7 @@ status: <!-- unpublished | built | published | failed -->
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | story/6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop | pr-open |
+| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | (merged, branch deleted) | merged |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -344,7 +344,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of [PR #24](https://github.com/stefano-bragaglia/deontic-reasoner/pull/24)
-(4-forward-chaining-fixed-point-loop); on merge, this is the last story of the last feature — run
-its on-merge steps, set feature 6 to stories-merged, then /pr 6-forward-chaining-and-delegation for
-the final epic PR, then refresh README.md and offer /publish.
+Run /pr 6-forward-chaining-and-delegation to open the final epic PR against main (every story
+merged; agent auto-merges once clean + CI-green); then refresh project/README.md and offer
+/publish.
