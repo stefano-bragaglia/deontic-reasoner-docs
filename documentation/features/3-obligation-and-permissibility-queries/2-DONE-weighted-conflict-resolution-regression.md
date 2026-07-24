@@ -1,4 +1,4 @@
-# 2. Weighted-Conflict Resolution Regression
+# 2. DONE - Weighted-Conflict Resolution Regression
 
 ## What it does
 
