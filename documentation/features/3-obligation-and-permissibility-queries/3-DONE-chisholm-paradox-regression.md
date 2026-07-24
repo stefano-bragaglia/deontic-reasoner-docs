@@ -1,4 +1,4 @@
-# 3. Chisholm's Paradox Regression
+# 3. DONE - Chisholm's Paradox Regression
 
 ## What it does
 

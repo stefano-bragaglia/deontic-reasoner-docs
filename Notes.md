@@ -49,7 +49,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | (merged, branch deleted) | merged |
-| 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | story/3-obligation-and-permissibility-queries/3-chisholm-paradox-regression | pr-open |
+| 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | | approved |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
@@ -283,6 +283,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of [PR #12](https://github.com/stefano-bragaglia/deontic-reasoner/pull/12)
-(3-chisholm-paradox-regression); on merge, run the story's on-merge steps, then
-/stage-a 3-obligation-and-permissibility-queries/4-deontic-explosion-containment-regression.
+Run /stage-a 3-obligation-and-permissibility-queries/4-deontic-explosion-containment-regression
+(last story of feature 3).
