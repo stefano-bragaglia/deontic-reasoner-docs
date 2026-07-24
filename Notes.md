@@ -34,7 +34,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
-| 5-scope-evaluation | branched | feature/5-scope-evaluation |
+| 5-scope-evaluation | stories-merged | feature/5-scope-evaluation |
 | 6-forward-chaining-and-delegation | approved | |
 
 ## Stories
@@ -54,7 +54,7 @@ status: <!-- unpublished | built | published | failed -->
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | (merged, branch deleted) | merged |
-| 5-scope-evaluation | 2-temporal-scope-evaluation | story/5-scope-evaluation/2-temporal-scope-evaluation | pr-open |
+| 5-scope-evaluation | 2-temporal-scope-evaluation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
@@ -310,6 +310,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of [PR #19](https://github.com/stefano-bragaglia/deontic-reasoner/pull/19)
-(2-temporal-scope-evaluation); on merge, this is feature 5's last story — run its on-merge steps,
-set feature 5 to stories-merged, then /pr 5-scope-evaluation for the epic PR.
+Run /pr 5-scope-evaluation to open feature 5's epic PR against main (every story merged; agent
+auto-merges once clean + CI-green).

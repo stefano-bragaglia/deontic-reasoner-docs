@@ -1,4 +1,4 @@
-# 2. Temporal Scope Evaluation
+# 2. DONE - Temporal Scope Evaluation
 
 ## What it does
 
