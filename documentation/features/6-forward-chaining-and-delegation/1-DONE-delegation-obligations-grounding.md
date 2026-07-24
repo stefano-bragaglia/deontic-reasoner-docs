@@ -1,4 +1,4 @@
-# 1. Delegation Obligations Grounding
+# 1. DONE - Delegation Obligations Grounding
 
 ## What it does
 
