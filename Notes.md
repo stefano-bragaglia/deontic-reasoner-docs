@@ -50,7 +50,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
-| 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | | approved |
+| 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | story/3-obligation-and-permissibility-queries/4-deontic-explosion-containment-regression | tests |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
@@ -283,5 +283,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 3-obligation-and-permissibility-queries/4-deontic-explosion-containment-regression
-(last story of feature 3).
+Run /stage-b 3-obligation-and-permissibility-queries/4-deontic-explosion-containment-regression
+(tests written, verified empirically against the merged implementation — likely no new
+production code needed, same as story 3, but confirm during Stage B).
