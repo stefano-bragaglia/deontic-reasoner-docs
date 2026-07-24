@@ -33,7 +33,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
-| 4-hohfeldian-grounding | approved | |
+| 4-hohfeldian-grounding | branched | feature/4-hohfeldian-grounding |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
 
@@ -51,7 +51,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
-| 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
+| 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | story/4-hohfeldian-grounding/1-norm-atom-and-correlative-rule-grounding | tests |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
@@ -287,7 +287,15 @@ status: <!-- unpublished | built | published | failed -->
   exclusive unless a hard constraint (or the antecedent) forces it — worth remembering for any future
   scenario using this "positive atom / not_X atom" convention.
 
+- Feature `4-hohfeldian-grounding` branched (epic branch created off `main` post-feature-3-merge, so it
+  starts current). Story 1's tests fix a concrete atom-naming scheme not spelled out precisely in the
+  story file, needed since Stage A tests are the spec Stage B must satisfy exactly: `atom_for_norm(norm)`
+  = `f"norm:{norm.id}"`; correlative head atom = `f"{word}:{counterparty}:{action}:{resource}"` where
+  `word` is `"duty"` (RIGHT), `"liability"` (POWER), `"disability"` (IMMUNITY) — chosen so story 2
+  (`2-directed-obligation-regression`) can independently reconstruct/compare atom identity without
+  reaching into `grounding.py` internals.
+
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 4-hohfeldian-grounding/1-norm-atom-and-correlative-rule-grounding (first story of
-feature 4; will create the feature/4-hohfeldian-grounding epic branch off current main).
+Run /stage-b 4-hohfeldian-grounding/1-norm-atom-and-correlative-rule-grounding (tests written; see
+Decisions for the atom-naming scheme the implementation must match).
