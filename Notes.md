@@ -46,7 +46,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | story/2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration | tests |
+| 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | story/2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration | code |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | | approved |
@@ -254,8 +254,16 @@ status: <!-- unpublished | built | published | failed -->
   argument is given in. This doesn't prove cross-process hash-seed independence directly, but it does
   prove the implementation doesn't leak list-argument order into the result, which is the property a
   caller can actually observe and rely on.
+- `best_worlds` computes the **maximal elements of a preorder** (candidate `c` stays in the result
+  unless some other candidate `d` is strictly preferred: `preferred(d,c) and not preferred(c,d)`), not
+  simply "the minimum-weight candidate." This matters specifically for `SUBSET`, which isn't a total
+  order — two candidates can be mutually incomparable, and both must survive into the result rather than
+  one being arbitrarily dropped. `COUNT`/`WEIGHTED_COUNT` are total orders, so this reduces to the usual
+  "all ties for the minimum" for those two, but the general algorithm handles all three criteria
+  uniformly with the same code path.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration (tests written;
-last story of this feature).
+Run /pr 2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration to open this
+story's PR against feature/2-preference-ordering-and-best-worlds (all gates green, 100% coverage; last
+story of this feature).
