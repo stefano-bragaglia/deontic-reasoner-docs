@@ -48,7 +48,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | (merged, branch deleted) | merged |
-| 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
+| 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | story/3-obligation-and-permissibility-queries/2-weighted-conflict-resolution-regression | tests |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | | approved |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | | approved |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
@@ -268,7 +268,21 @@ status: <!-- unpublished | built | published | failed -->
   `PreferenceCriterion`, `violated_rules`, `preferred`, `best_worlds` — the whole semantic engine core
   that replaces the superseded SAT-based conflict detection, now on `main`.
 
+- **Bug found and fixed in the story's own worked-scenario design** (§14.4 adaptation, before writing
+  the test): the story text's original setup (a `default_send` rule and an `external_prohibition` rule
+  over independent atoms `sent`/`not_sent`, no exclusivity) doesn't actually demonstrate what it claims —
+  empirically verified with `best_worlds` directly, `is_permitted` incorrectly returns `True` even in the
+  "external recipient" case, because nothing stops `sent` and `not_sent` being true *simultaneously*,
+  letting both rules get satisfied "for free." Fixed by adding
+  `HardConstraint(forbidden=frozenset({"sent", "not_sent"}))` to force the genuine trade-off the scenario
+  is supposed to test. Re-verified empirically after the fix: internal → `True`, external → `False`,
+  matching the story's intended result. This is a real, general gotcha for constructing test scenarios
+  in this framework: two atoms named as if they were negations of each other are **not** mutually
+  exclusive unless a hard constraint (or the antecedent) forces it — worth remembering for any future
+  scenario using this "positive atom / not_X atom" convention.
+
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 3-obligation-and-permissibility-queries/2-weighted-conflict-resolution-regression (next
-story — test-only, per its own story file: no new production code expected).
+Run /stage-b 3-obligation-and-permissibility-queries/2-weighted-conflict-resolution-regression (tests
+written and already passing against existing production code — test-only story, no code change
+expected).
