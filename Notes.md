@@ -344,9 +344,15 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Retry opening the final epic PR (/pr 6-forward-chaining-and-delegation) — GitHub's REST/GraphQL PR-
-creation endpoint returned repeated 500 Internal Server Errors on 2026-07-24 ~19:25 UTC (confirmed
-transient on GitHub's side: basic GraphQL queries and other `gh` calls worked fine throughout, only
-PR creation failed). `feature/6-forward-chaining-and-delegation` is already pushed and CI-green;
-once the PR opens, proceed straight through the auto-merge steps, then refresh project/README.md
-and offer /publish.
+Retry opening the final epic PR (/pr 6-forward-chaining-and-delegation) — as of 2026-07-24 ~19:36 UTC
+`POST /repos/.../pulls` (both via `gh pr create` and raw `gh api`) still returns HTTP 500, even though
+githubstatus.com reports the 2026-07-24 incident resolved at 17:36 UTC and every other endpoint tested
+against this same repo (`GET /repos/...`, `GET /repos/.../compare/main...feature/...`, `gh api
+/rate_limit`) returns 200 normally — the failure is isolated specifically to the PR-creation write
+path, not a general outage or a branch/permissions problem (branch diff verified clean: 12 commits
+ahead, 639 insertions across 9 files, no conflicts; remote refs match local).
+`feature/6-forward-chaining-and-delegation` is already pushed and CI-green. Asked the user whether to
+keep auto-retrying `/pr 6-forward-chaining-and-delegation` periodically, or have them open the PR
+manually via the GitHub website (browser UI may use a different code path) and tell the agent once
+it's open so it can run the remaining auto-merge steps. Once the PR opens (either way), proceed
+straight through the auto-merge steps, then refresh project/README.md and offer /publish.
