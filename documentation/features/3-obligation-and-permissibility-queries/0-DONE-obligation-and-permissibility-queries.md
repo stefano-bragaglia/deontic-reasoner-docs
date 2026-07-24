@@ -1,4 +1,4 @@
-# 3. Obligation and Permissibility Queries
+# 3. DONE - Obligation and Permissibility Queries
 
 ## Name
 

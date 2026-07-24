@@ -32,7 +32,7 @@ status: <!-- unpublished | built | published | failed -->
 |---|---|---|
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
-| 3-obligation-and-permissibility-queries | pr-open | feature/3-obligation-and-permissibility-queries |
+| 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | approved | |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
@@ -268,6 +268,12 @@ status: <!-- unpublished | built | published | failed -->
   `PreferenceCriterion`, `violated_rules`, `preferred`, `best_worlds` — the whole semantic engine core
   that replaces the superseded SAT-based conflict detection, now on `main`.
 
+- Feature `3-obligation-and-permissibility-queries` merged to `main` via epic PR
+  [#14](https://github.com/stefano-bragaglia/deontic-reasoner/pull/14) — same auto-merge path as features
+  1 and 2 (`mergeable=MERGEABLE`, required `test` CI check passed, merged via `gh pr merge --merge`). Epic
+  file marked `DONE`. **Third feature of this iteration fully shipped**: `is_obligatory`/`is_permitted`
+  plus regression coverage for §14.4, §14.8, and §14.9. Two of its four stories (3 and 4) needed no new
+  production code at all — pure regression tests against the already-merged query engine.
 - **Bug found and fixed in the story's own worked-scenario design** (§14.4 adaptation, before writing
   the test): the story text's original setup (a `default_send` rule and an `external_prohibition` rule
   over independent atoms `sent`/`not_sent`, no exclusivity) doesn't actually demonstrate what it claims —
@@ -283,5 +289,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 3-obligation-and-permissibility-queries to open feature 3's epic PR against main (every
-story merged; agent auto-merges once clean + CI-green).
+Run /stage-a 4-hohfeldian-grounding/1-norm-atom-and-correlative-rule-grounding (first story of
+feature 4; will create the feature/4-hohfeldian-grounding epic branch off current main).
