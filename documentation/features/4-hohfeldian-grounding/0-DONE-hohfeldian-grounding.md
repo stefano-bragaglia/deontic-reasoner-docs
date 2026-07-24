@@ -1,4 +1,4 @@
-# 4. Hohfeldian Grounding
+# 4. DONE - Hohfeldian Grounding
 
 ## Name
 

@@ -33,7 +33,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
-| 4-hohfeldian-grounding | pr-open | feature/4-hohfeldian-grounding |
+| 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
 
@@ -268,6 +268,12 @@ status: <!-- unpublished | built | published | failed -->
   `PreferenceCriterion`, `violated_rules`, `preferred`, `best_worlds` — the whole semantic engine core
   that replaces the superseded SAT-based conflict detection, now on `main`.
 
+- Feature `4-hohfeldian-grounding` merged to `main` via epic PR
+  [#17](https://github.com/stefano-bragaglia/deontic-reasoner/pull/17) — same auto-merge path as
+  features 1–3 (`mergeable=MERGEABLE`, required `test` CI check passed, merged via
+  `gh pr merge --merge`). Epic file marked `DONE`. **Fourth feature of this iteration fully shipped**:
+  `atom_for_norm`/`ground_norm`/`CORRELATIVE_WEIGHT`, proving directed obligations (§14.2) work
+  end-to-end through the query engine.
 - Feature `3-obligation-and-permissibility-queries` merged to `main` via epic PR
   [#14](https://github.com/stefano-bragaglia/deontic-reasoner/pull/14) — same auto-merge path as features
   1 and 2 (`mergeable=MERGEABLE`, required `test` CI check passed, merged via `gh pr merge --merge`). Epic
@@ -297,5 +303,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 4-hohfeldian-grounding to open feature 4's epic PR against main (every story merged;
-agent auto-merges once clean + CI-green).
+Run /stage-a 5-scope-evaluation/1-predicate-registry-and-condition-evaluation (first story of
+feature 5; will create the feature/5-scope-evaluation epic branch off current main).
