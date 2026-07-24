@@ -45,7 +45,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | story/2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria | tests |
+| 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | story/2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria | code |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
@@ -257,4 +257,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria (tests written).
+Run /pr 2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria to open this story's
+PR against feature/2-preference-ordering-and-best-worlds (all gates green, 100% coverage).
