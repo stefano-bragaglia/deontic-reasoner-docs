@@ -33,7 +33,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
-| 4-hohfeldian-grounding | stories-merged | feature/4-hohfeldian-grounding |
+| 4-hohfeldian-grounding | pr-open | feature/4-hohfeldian-grounding |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
 
