@@ -44,7 +44,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | story/2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion | tests |
+| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | story/2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion | code |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
@@ -240,8 +240,14 @@ status: <!-- unpublished | built | published | failed -->
   file marked `DONE` (`0-core-data-model.md` → `0-DONE-core-data-model.md`). **First feature of this
   iteration fully shipped**: `Atom`/`World`/`Rule`/`HardConstraint`/`Relation`/`Norm` +
   `to_dict`/`from_dict`/`world_to_list`/`world_from_list`, all on `main`.
+- New `ruff`/`pep257` rules hit for the first time in `preference.py` (first module with plain function,
+  not class, docstrings): D400 (first line must end with a period) and D401 (first line must be
+  imperative mood — "Check whether..." not "Does..."/"Is..."). Both only apply to function/method
+  docstrings, not class docstrings, which is why `models.py`/`serialization.py`'s noun-phrase class
+  docstrings never tripped this. Worth writing function docstrings in imperative mood from the start in
+  later stories to avoid the same fix-up cycle.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion
-(tests written; epic branch feature/2-preference-ordering-and-best-worlds created off main and pushed).
+Run /pr 2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion to open
+this story's PR against feature/2-preference-ordering-and-best-worlds (all gates green, 100% coverage).
