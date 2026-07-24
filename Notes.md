@@ -35,7 +35,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
 | 5-scope-evaluation | done | feature/5-scope-evaluation |
-| 6-forward-chaining-and-delegation | approved | |
+| 6-forward-chaining-and-delegation | branched | feature/6-forward-chaining-and-delegation |
 
 ## Stories
 | Feature | Story | Branch | Status |
@@ -55,7 +55,7 @@ status: <!-- unpublished | built | published | failed -->
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
+| 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | story/6-forward-chaining-and-delegation/1-delegation-obligations-grounding | tests |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
 | 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
@@ -313,8 +313,16 @@ status: <!-- unpublished | built | published | failed -->
   prose ("which may itself raise ...") instead of a `:raises:` field. Worth remembering for any future
   function that only propagates an exception from a callee.
 
+- Feature `6-forward-chaining-and-delegation` (last feature) branched. Story 1's tests fix a concrete
+  atom-naming scheme, same pattern as feature 4's `grounding.py`: `atom_for_delegation(delegator,
+  delegatee, norm_id)` = `f"delegation:{delegator}:{delegatee}:{norm_id}"`;
+  `atom_for_violation(delegatee, norm_id)` = `f"violation:{delegatee}:{norm_id}"`; correlative heads
+  = `f"audit:{delegator}"` / `f"revoke:{delegator}"` / `f"liability:{delegator}:{delegatee}"`. The
+  §14.5 broken-chain test builds its two-hop chain rule directly with plain-string `valid_link`/
+  `permission` atoms (no dedicated chain-modeling helper — per the story's own note, this is the
+  caller's responsibility, not `ground_delegation`'s).
+
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 6-forward-chaining-and-delegation/1-delegation-obligations-grounding (first story of
-the last feature, 6; will create the feature/6-forward-chaining-and-delegation epic branch off
-current main).
+Run /stage-b 6-forward-chaining-and-delegation/1-delegation-obligations-grounding (tests written;
+see Decisions for the atom-naming scheme delegation.py must match).
