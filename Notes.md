@@ -344,15 +344,16 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Retry opening the final epic PR (/pr 6-forward-chaining-and-delegation) — as of 2026-07-24 ~19:36 UTC
-`POST /repos/.../pulls` (both via `gh pr create` and raw `gh api`) still returns HTTP 500, even though
-githubstatus.com reports the 2026-07-24 incident resolved at 17:36 UTC and every other endpoint tested
-against this same repo (`GET /repos/...`, `GET /repos/.../compare/main...feature/...`, `gh api
-/rate_limit`) returns 200 normally — the failure is isolated specifically to the PR-creation write
-path, not a general outage or a branch/permissions problem (branch diff verified clean: 12 commits
-ahead, 639 insertions across 9 files, no conflicts; remote refs match local).
-`feature/6-forward-chaining-and-delegation` is already pushed and CI-green. Asked the user whether to
-keep auto-retrying `/pr 6-forward-chaining-and-delegation` periodically, or have them open the PR
-manually via the GitHub website (browser UI may use a different code path) and tell the agent once
-it's open so it can run the remaining auto-merge steps. Once the PR opens (either way), proceed
+Retry opening the final epic PR (/pr 6-forward-chaining-and-delegation) — as of 2026-07-24 ~19:45 UTC
+PR creation still fails with HTTP 500 via **both** `gh api`/`gh pr create` **and** the GitHub website's
+own "Create pull request" button (user confirmed via browser: same Octocat "Ooops!!! 500" error page).
+This rules out a `gh`-CLI-specific or API-only issue — it's a genuine GitHub-side outage isolated to
+the PR-creation write path specifically, despite githubstatus.com showing the 2026-07-24 incident as
+resolved at 17:36 UTC and every other endpoint against this repo (`GET /repos/...`, `compare/main...`,
+`rate_limit`) returning 200 normally. Branch itself verified clean and ready: `main...feature/6-...`
+shows "Able to merge", 12 commits ahead, 9 files changed, no conflicts.
+`feature/6-forward-chaining-and-delegation` is already pushed and CI-green — nothing left to prepare.
+Next session (or later this session): just retry `/pr 6-forward-chaining-and-delegation` (or the
+GitHub website's compare-branches page) once GitHub's PR-creation path is confirmed actually healthy —
+no further diagnosis needed, this is purely waiting out an external outage. Once the PR opens, proceed
 straight through the auto-merge steps, then refresh project/README.md and offer /publish.
