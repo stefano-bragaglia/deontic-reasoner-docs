@@ -46,7 +46,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
+| 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | story/2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration | tests |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | | approved |
@@ -257,5 +257,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration (last story of
-this feature).
+Run /stage-b 2-preference-ordering-and-best-worlds/3-best-worlds-with-scoped-enumeration (tests written;
+last story of this feature).
