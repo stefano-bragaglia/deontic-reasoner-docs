@@ -53,7 +53,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
-| 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | story/5-scope-evaluation/1-predicate-registry-and-condition-evaluation | tests |
+| 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | story/5-scope-evaluation/1-predicate-registry-and-condition-evaluation | code |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
@@ -303,5 +303,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 5-scope-evaluation/1-predicate-registry-and-condition-evaluation (tests written;
-implement scope.py's PredicateRegistry/UnknownPredicateError/evaluate_condition).
+Run /pr 5-scope-evaluation/1-predicate-registry-and-condition-evaluation to open this story's PR
+against feature/5-scope-evaluation (all gates green, 100% coverage).
