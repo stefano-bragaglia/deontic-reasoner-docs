@@ -1,4 +1,4 @@
-# 2. Power-Exercise Norm Generation
+# 2. DONE - Power-Exercise Norm Generation
 
 ## What it does
 
