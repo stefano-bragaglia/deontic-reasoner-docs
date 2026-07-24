@@ -58,7 +58,7 @@ status: <!-- unpublished | built | published | failed -->
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | story/6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop | code |
+| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | story/6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop | pr-open |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -344,6 +344,7 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop to open this story's
-PR against feature/6-forward-chaining-and-delegation (all gates green, 98.65% coverage, all
-individual files ≥90% — this is the last story of the last feature).
+Await review/merge of [PR #24](https://github.com/stefano-bragaglia/deontic-reasoner/pull/24)
+(4-forward-chaining-fixed-point-loop); on merge, this is the last story of the last feature — run
+its on-merge steps, set feature 6 to stories-merged, then /pr 6-forward-chaining-and-delegation for
+the final epic PR, then refresh README.md and offer /publish.
