@@ -377,11 +377,11 @@ status: <!-- unpublished | built | published | failed -->
   [othneildrew/Best-README-Template](https://github.com/othneildrew/Best-README-Template)'s
   section structure, with a Roadmap listing PyPI publish, a DSL for authoring rules/norms, a
   parser for it, a PyCharm syntax-highlighter plugin, a full CLI, and the already-planned MCP
-  server integration. Opened as
-  [PR #28](https://github.com/stefano-bragaglia/deontic-reasoner/pull/28), not yet merged.
+  server integration. [PR #28](https://github.com/stefano-bragaglia/deontic-reasoner/pull/28)
+  merged; branch deleted; confirmed `README.md`/`MANUAL.md`/`docs/logo.png`/`examples/` all
+  present on `main`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await user review/merge of PR #28 (docs/examples/README); once merged, pull main and confirm
-project/README.md and MANUAL.md render as expected, then offer /publish — all six features of
-this iteration are already merged to main, this is the last doc polish before that gate.
+Offer /publish (agent) — all six features of this iteration, plus the follow-up docs/examples/
+README polish, are merged to main; nothing else is pending before the publish gate.
