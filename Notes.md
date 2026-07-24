@@ -52,7 +52,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
-| 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
+| 4-hohfeldian-grounding | 2-directed-obligation-regression | story/4-hohfeldian-grounding/2-directed-obligation-regression | tests |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
@@ -297,4 +297,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 4-hohfeldian-grounding/2-directed-obligation-regression (last story of feature 4).
+Run /stage-b 4-hohfeldian-grounding/2-directed-obligation-regression (tests written, verified
+empirically against the merged grounding.py/queries.py — likely no new production code needed,
+confirm during Stage B).
