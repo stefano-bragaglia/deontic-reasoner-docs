@@ -51,7 +51,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
-| 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | story/4-hohfeldian-grounding/1-norm-atom-and-correlative-rule-grounding | pr-open |
+| 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
@@ -297,6 +297,4 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of [PR #15](https://github.com/stefano-bragaglia/deontic-reasoner/pull/15)
-(1-norm-atom-and-correlative-rule-grounding); on merge, run the story's on-merge steps, then
-/stage-a 4-hohfeldian-grounding/2-directed-obligation-regression.
+Run /stage-a 4-hohfeldian-grounding/2-directed-obligation-regression (last story of feature 4).

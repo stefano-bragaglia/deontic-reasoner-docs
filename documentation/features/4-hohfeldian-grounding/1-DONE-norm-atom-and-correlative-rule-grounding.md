@@ -1,4 +1,4 @@
-# 1. Norm Atom and Correlative Rule Grounding
+# 1. DONE - Norm Atom and Correlative Rule Grounding
 
 ## What it does
 
