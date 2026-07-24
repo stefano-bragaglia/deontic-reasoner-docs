@@ -34,7 +34,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
-| 5-scope-evaluation | pr-open | feature/5-scope-evaluation |
+| 5-scope-evaluation | done | feature/5-scope-evaluation |
 | 6-forward-chaining-and-delegation | approved | |
 
 ## Stories
@@ -268,6 +268,11 @@ status: <!-- unpublished | built | published | failed -->
   `PreferenceCriterion`, `violated_rules`, `preferred`, `best_worlds` — the whole semantic engine core
   that replaces the superseded SAT-based conflict detection, now on `main`.
 
+- Feature `5-scope-evaluation` merged to `main` via epic PR
+  [#20](https://github.com/stefano-bragaglia/deontic-reasoner/pull/20) — same auto-merge path as
+  features 1–4. Epic file marked `DONE`. **Fifth feature of this iteration fully shipped**:
+  `PredicateRegistry`/`UnknownPredicateError`/`evaluate_condition`/`scope_matches`, proving the §14.1
+  fresh-re-evaluation regression end-to-end.
 - Feature `4-hohfeldian-grounding` merged to `main` via epic PR
   [#17](https://github.com/stefano-bragaglia/deontic-reasoner/pull/17) — same auto-merge path as
   features 1–3 (`mergeable=MERGEABLE`, required `test` CI check passed, merged via
@@ -310,5 +315,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 5-scope-evaluation to open feature 5's epic PR against main (every story merged; agent
-auto-merges once clean + CI-green).
+Run /stage-a 6-forward-chaining-and-delegation/1-delegation-obligations-grounding (first story of
+the last feature, 6; will create the feature/6-forward-chaining-and-delegation epic branch off
+current main).

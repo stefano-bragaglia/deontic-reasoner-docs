@@ -1,4 +1,4 @@
-# 5. Scope Evaluation
+# 5. DONE - Scope Evaluation
 
 ## Name
 
