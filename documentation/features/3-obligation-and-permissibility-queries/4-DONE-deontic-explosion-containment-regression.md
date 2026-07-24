@@ -1,4 +1,4 @@
-# 4. Deontic-Explosion Containment Regression
+# 4. DONE - Deontic-Explosion Containment Regression
 
 ## What it does
 

@@ -32,7 +32,7 @@ status: <!-- unpublished | built | published | failed -->
 |---|---|---|
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
-| 3-obligation-and-permissibility-queries | branched | feature/3-obligation-and-permissibility-queries |
+| 3-obligation-and-permissibility-queries | stories-merged | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | approved | |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
@@ -50,7 +50,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
-| 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | story/3-obligation-and-permissibility-queries/4-deontic-explosion-containment-regression | pr-open |
+| 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | | approved |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | | approved |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
@@ -283,7 +283,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of [PR #13](https://github.com/stefano-bragaglia/deontic-reasoner/pull/13)
-(4-deontic-explosion-containment-regression); on merge, this is feature 3's last story — run its
-on-merge steps, set feature 3 to stories-merged, then /pr 3-obligation-and-permissibility-queries
-for the epic PR.
+Run /pr 3-obligation-and-permissibility-queries to open feature 3's epic PR against main (every
+story merged; agent auto-merges once clean + CI-green).
