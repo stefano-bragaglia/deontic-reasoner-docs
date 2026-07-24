@@ -56,7 +56,7 @@ status: <!-- unpublished | built | published | failed -->
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | story/6-forward-chaining-and-delegation/2-power-exercise-norm-generation | tests |
+| 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | story/6-forward-chaining-and-delegation/2-power-exercise-norm-generation | code |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
 | 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
 
@@ -324,6 +324,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 6-forward-chaining-and-delegation/2-power-exercise-norm-generation (tests written;
-add exercise_power to delegation.py, id deterministic in (power_norm.id, subject, relation,
-action, resource, counterparty)).
+Run /pr 6-forward-chaining-and-delegation/2-power-exercise-norm-generation to open this story's PR
+against feature/6-forward-chaining-and-delegation (all gates green, 100% coverage).
