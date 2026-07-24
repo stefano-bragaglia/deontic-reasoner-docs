@@ -1,4 +1,4 @@
-# 2. Preference Ordering — Three Criteria
+# 2. DONE - Preference Ordering — Three Criteria
 
 ## What it does
 
