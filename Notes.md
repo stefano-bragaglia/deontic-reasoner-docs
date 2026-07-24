@@ -32,7 +32,7 @@ status: <!-- unpublished | built | published | failed -->
 |---|---|---|
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
-| 3-obligation-and-permissibility-queries | approved | |
+| 3-obligation-and-permissibility-queries | branched | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | approved | |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
@@ -47,7 +47,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | (merged, branch deleted) | merged |
-| 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
+| 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | story/3-obligation-and-permissibility-queries/1-obligation-and-permissibility-queries | tests |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | | approved |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | | approved |
@@ -270,5 +270,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 3-obligation-and-permissibility-queries/1-obligation-and-permissibility-queries (next
-feature in build order, first story).
+Run /stage-b 3-obligation-and-permissibility-queries/1-obligation-and-permissibility-queries (tests
+written; epic branch feature/3-obligation-and-permissibility-queries created off main and pushed).
