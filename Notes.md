@@ -31,7 +31,7 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Status | Branch |
 |---|---|---|
 | 1-core-data-model | done | feature/1-core-data-model |
-| 2-preference-ordering-and-best-worlds | approved | |
+| 2-preference-ordering-and-best-worlds | branched | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | approved | |
 | 4-hohfeldian-grounding | approved | |
 | 5-scope-evaluation | approved | |
@@ -44,7 +44,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | | approved |
+| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | story/2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion | tests |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
@@ -243,5 +243,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion (next
-feature in build order, first story).
+Run /stage-b 2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion
+(tests written; epic branch feature/2-preference-ordering-and-best-worlds created off main and pushed).
