@@ -58,7 +58,7 @@ status: <!-- unpublished | built | published | failed -->
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | story/6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop | tests |
+| 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | story/6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop | code |
 
 ## Decisions
 <!-- Key choices made and why. Future agents use this to avoid re-litigating. -->
@@ -344,5 +344,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop (tests written;
-see Decisions for the forward_chain convergence-loop design the implementation must match).
+Run /pr 6-forward-chaining-and-delegation/4-forward-chaining-fixed-point-loop to open this story's
+PR against feature/6-forward-chaining-and-delegation (all gates green, 98.65% coverage, all
+individual files ≥90% — this is the last story of the last feature).
