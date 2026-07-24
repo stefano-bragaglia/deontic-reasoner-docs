@@ -52,7 +52,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
-| 4-hohfeldian-grounding | 2-directed-obligation-regression | story/4-hohfeldian-grounding/2-directed-obligation-regression | code |
+| 4-hohfeldian-grounding | 2-directed-obligation-regression | story/4-hohfeldian-grounding/2-directed-obligation-regression | pr-open |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
@@ -297,6 +297,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 4-hohfeldian-grounding/2-directed-obligation-regression to open this story's PR against
-feature/4-hohfeldian-grounding (all gates green, 100% coverage; no production code change — last
-story of feature 4).
+Await review/merge of [PR #16](https://github.com/stefano-bragaglia/deontic-reasoner/pull/16)
+(2-directed-obligation-regression); on merge, this is feature 4's last story — run its on-merge
+steps, set feature 4 to stories-merged, then /pr 4-hohfeldian-grounding for the epic PR.
