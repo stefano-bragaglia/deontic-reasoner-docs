@@ -31,7 +31,7 @@ status: <!-- unpublished | built | published | failed -->
 | Feature | Status | Branch |
 |---|---|---|
 | 1-core-data-model | done | feature/1-core-data-model |
-| 2-preference-ordering-and-best-worlds | stories-merged | feature/2-preference-ordering-and-best-worlds |
+| 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | approved | |
 | 4-hohfeldian-grounding | approved | |
 | 5-scope-evaluation | approved | |
@@ -261,8 +261,14 @@ status: <!-- unpublished | built | published | failed -->
   one being arbitrarily dropped. `COUNT`/`WEIGHTED_COUNT` are total orders, so this reduces to the usual
   "all ties for the minimum" for those two, but the general algorithm handles all three criteria
   uniformly with the same code path.
+- Feature `2-preference-ordering-and-best-worlds` merged to `main` via epic PR
+  [#9](https://github.com/stefano-bragaglia/deontic-reasoner/pull/9) — same auto-merge path as feature 1
+  (`mergeable=MERGEABLE`, required `test` CI check passed, merged via `gh pr merge --merge`). Epic file
+  marked `DONE`. **Second feature of this iteration fully shipped**: `violates`, `excludes`,
+  `PreferenceCriterion`, `violated_rules`, `preferred`, `best_worlds` — the whole semantic engine core
+  that replaces the superseded SAT-based conflict detection, now on `main`.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 2-preference-ordering-and-best-worlds to open the epic PR into main (every story merged; this
-tier auto-merges on clean merge + green CI).
+Run /stage-a 3-obligation-and-permissibility-queries/1-obligation-and-permissibility-queries (next
+feature in build order, first story).
