@@ -57,7 +57,7 @@ status: <!-- unpublished | built | published | failed -->
 | 5-scope-evaluation | 2-temporal-scope-evaluation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
+| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | story/6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing | tests |
 | 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
 
 ## Decisions
@@ -324,4 +324,6 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing.
+Run /stage-b 6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing (tests
+written; add delegate_with_narrowing to delegation.py, intersecting valid_from/valid_until with
+parent's, None never widening).
