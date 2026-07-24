@@ -45,7 +45,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
+| 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | story/2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria | tests |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
 | 3-obligation-and-permissibility-queries | 2-weighted-conflict-resolution-regression | | approved |
@@ -246,7 +246,15 @@ status: <!-- unpublished | built | published | failed -->
   docstrings, not class docstrings, which is why `models.py`/`serialization.py`'s noun-phrase class
   docstrings never tripped this. Worth writing function docstrings in imperative mood from the start in
   later stories to avoid the same fix-up cycle.
+- Story 2's acceptance criterion 7 (stable, sort-key-based weight summation, not raw hash-dependent
+  iteration order) can't be directly exercised by a black-box unit test — a single test process has a
+  fixed hash seed, so a `frozenset`'s iteration order never actually varies within one run regardless of
+  whether the implementation sorts or not. Tested via the practical proxy that's actually achievable:
+  `preferred(...)`'s result must be identical regardless of the order the caller's `rules` *list*
+  argument is given in. This doesn't prove cross-process hash-seed independence directly, but it does
+  prove the implementation doesn't leak list-argument order into the result, which is the property a
+  caller can actually observe and rely on.
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria (next story).
+Run /stage-b 2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria (tests written).
