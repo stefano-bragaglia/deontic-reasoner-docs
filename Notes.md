@@ -33,7 +33,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | done | feature/1-core-data-model |
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
-| 4-hohfeldian-grounding | branched | feature/4-hohfeldian-grounding |
+| 4-hohfeldian-grounding | stories-merged | feature/4-hohfeldian-grounding |
 | 5-scope-evaluation | approved | |
 | 6-forward-chaining-and-delegation | approved | |
 
@@ -52,7 +52,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 3-chisholm-paradox-regression | (merged, branch deleted) | merged |
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
-| 4-hohfeldian-grounding | 2-directed-obligation-regression | story/4-hohfeldian-grounding/2-directed-obligation-regression | pr-open |
+| 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
@@ -297,6 +297,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of [PR #16](https://github.com/stefano-bragaglia/deontic-reasoner/pull/16)
-(2-directed-obligation-regression); on merge, this is feature 4's last story — run its on-merge
-steps, set feature 4 to stories-merged, then /pr 4-hohfeldian-grounding for the epic PR.
+Run /pr 4-hohfeldian-grounding to open feature 4's epic PR against main (every story merged;
+agent auto-merges once clean + CI-green).
