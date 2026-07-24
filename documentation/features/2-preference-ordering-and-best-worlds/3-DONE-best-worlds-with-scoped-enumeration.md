@@ -1,4 +1,4 @@
-# 3. Best-Worlds Computation with Scoped Enumeration
+# 3. DONE - Best-Worlds Computation with Scoped Enumeration
 
 ## What it does
 
