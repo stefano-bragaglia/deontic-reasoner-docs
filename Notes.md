@@ -344,6 +344,9 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /pr 6-forward-chaining-and-delegation to open the final epic PR against main (every story
-merged; agent auto-merges once clean + CI-green); then refresh project/README.md and offer
-/publish.
+Retry opening the final epic PR (/pr 6-forward-chaining-and-delegation) — GitHub's REST/GraphQL PR-
+creation endpoint returned repeated 500 Internal Server Errors on 2026-07-24 ~19:25 UTC (confirmed
+transient on GitHub's side: basic GraphQL queries and other `gh` calls worked fine throughout, only
+PR creation failed). `feature/6-forward-chaining-and-delegation` is already pushed and CI-green;
+once the PR opens, proceed straight through the auto-merge steps, then refresh project/README.md
+and offer /publish.
