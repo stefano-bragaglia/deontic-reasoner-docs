@@ -34,7 +34,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
-| 5-scope-evaluation | stories-merged | feature/5-scope-evaluation |
+| 5-scope-evaluation | pr-open | feature/5-scope-evaluation |
 | 6-forward-chaining-and-delegation | approved | |
 
 ## Stories
