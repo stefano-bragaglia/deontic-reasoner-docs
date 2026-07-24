@@ -57,7 +57,7 @@ status: <!-- unpublished | built | published | failed -->
 | 5-scope-evaluation | 2-temporal-scope-evaluation | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | (merged, branch deleted) | merged |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | (merged, branch deleted) | merged |
-| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | story/6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing | tests |
+| 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | story/6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing | code |
 | 6-forward-chaining-and-delegation | 4-forward-chaining-fixed-point-loop | | approved |
 
 ## Decisions
@@ -322,8 +322,13 @@ status: <!-- unpublished | built | published | failed -->
   `permission` atoms (no dedicated chain-modeling helper — per the story's own note, this is the
   caller's responsibility, not `ground_delegation`'s).
 
+- `delegation.py` sits at 94% file coverage after story 3 (two lines uncovered: the "parent has an
+  unbounded side" branch of `_narrow_lower_bound`/`_narrow_upper_bound`) — still clears the 90%
+  per-file gate, left as-is since Stage B may not edit the story's own test file to add the missing
+  case; every other module in this project remains at 100%. Worth a look if a later story happens to
+  touch this path anyway.
+
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-b 6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing (tests
-written; add delegate_with_narrowing to delegation.py, intersecting valid_from/valid_until with
-parent's, None never widening).
+Run /pr 6-forward-chaining-and-delegation/3-delegation-grant-with-scope-narrowing to open this
+story's PR against feature/6-forward-chaining-and-delegation (all gates green, 94%+ coverage).
