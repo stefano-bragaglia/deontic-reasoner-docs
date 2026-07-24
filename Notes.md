@@ -54,7 +54,7 @@ status: <!-- unpublished | built | published | failed -->
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
 | 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | (merged, branch deleted) | merged |
-| 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
+| 5-scope-evaluation | 2-temporal-scope-evaluation | story/5-scope-evaluation/2-temporal-scope-evaluation | tests |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
 | 6-forward-chaining-and-delegation | 3-delegation-grant-with-scope-narrowing | | approved |
@@ -303,4 +303,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 5-scope-evaluation/2-temporal-scope-evaluation (last story of feature 5).
+Run /stage-b 5-scope-evaluation/2-temporal-scope-evaluation (tests written; add scope_matches to
+scope.py).
