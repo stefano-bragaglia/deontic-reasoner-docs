@@ -1,4 +1,4 @@
-# 1. Rule Violation and Hard-Constraint Exclusion
+# 1. DONE - Rule Violation and Hard-Constraint Exclusion
 
 ## What it does
 

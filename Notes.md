@@ -44,7 +44,7 @@ status: <!-- unpublished | built | published | failed -->
 | 1-core-data-model | 1-propositional-core-types | (merged, branch deleted) | merged |
 | 1-core-data-model | 2-hohfeldian-norm-and-relation | (merged, branch deleted) | merged |
 | 1-core-data-model | 3-json-round-trip | (merged, branch deleted) | merged |
-| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | story/2-preference-ordering-and-best-worlds/1-rule-violation-and-hard-constraint-exclusion | pr-open |
+| 2-preference-ordering-and-best-worlds | 1-rule-violation-and-hard-constraint-exclusion | (merged, branch deleted) | merged |
 | 2-preference-ordering-and-best-worlds | 2-preference-ordering-three-criteria | | approved |
 | 2-preference-ordering-and-best-worlds | 3-best-worlds-with-scoped-enumeration | | approved |
 | 3-obligation-and-permissibility-queries | 1-obligation-and-permissibility-queries | | approved |
@@ -249,6 +249,4 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Await review/merge of https://github.com/stefano-bragaglia/deontic-reasoner/pull/6 (story PR into
-feature/2-preference-ordering-and-best-worlds); on merge, mark it done and move to
-/stage-a 2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria.
+Run /stage-a 2-preference-ordering-and-best-worlds/2-preference-ordering-three-criteria (next story).
