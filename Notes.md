@@ -4,7 +4,7 @@
 <!-- onboarding | setup | requirements | features | stories | stage-a | stage-b | pr | publish | done -->
 <!-- a later iteration (see CLAUDE.md -> New Iterations) re-enters at onboarding/requirements/features and reuses
      these same phase values -- there is no separate "iteration N" phase -->
-stage-a
+publish
 
 ## Project
 name: deontic-reasoner
