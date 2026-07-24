@@ -34,7 +34,7 @@ status: <!-- unpublished | built | published | failed -->
 | 2-preference-ordering-and-best-worlds | done | feature/2-preference-ordering-and-best-worlds |
 | 3-obligation-and-permissibility-queries | done | feature/3-obligation-and-permissibility-queries |
 | 4-hohfeldian-grounding | done | feature/4-hohfeldian-grounding |
-| 5-scope-evaluation | approved | |
+| 5-scope-evaluation | branched | feature/5-scope-evaluation |
 | 6-forward-chaining-and-delegation | approved | |
 
 ## Stories
@@ -53,7 +53,7 @@ status: <!-- unpublished | built | published | failed -->
 | 3-obligation-and-permissibility-queries | 4-deontic-explosion-containment-regression | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 1-norm-atom-and-correlative-rule-grounding | (merged, branch deleted) | merged |
 | 4-hohfeldian-grounding | 2-directed-obligation-regression | (merged, branch deleted) | merged |
-| 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | | approved |
+| 5-scope-evaluation | 1-predicate-registry-and-condition-evaluation | story/5-scope-evaluation/1-predicate-registry-and-condition-evaluation | tests |
 | 5-scope-evaluation | 2-temporal-scope-evaluation | | approved |
 | 6-forward-chaining-and-delegation | 1-delegation-obligations-grounding | | approved |
 | 6-forward-chaining-and-delegation | 2-power-exercise-norm-generation | | approved |
@@ -303,5 +303,5 @@ status: <!-- unpublished | built | published | failed -->
 
 ## Next Action
 <!-- One sentence. What should happen next, and who does it (agent or user). -->
-Run /stage-a 5-scope-evaluation/1-predicate-registry-and-condition-evaluation (first story of
-feature 5; will create the feature/5-scope-evaluation epic branch off current main).
+Run /stage-b 5-scope-evaluation/1-predicate-registry-and-condition-evaluation (tests written;
+implement scope.py's PredicateRegistry/UnknownPredicateError/evaluate_condition).
