@@ -1,4 +1,4 @@
-# 1. Predicate Registry and Condition Evaluation
+# 1. DONE - Predicate Registry and Condition Evaluation
 
 ## What it does
 
