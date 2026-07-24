@@ -1,4 +1,4 @@
-# 3. Delegation Grant with Scope-Narrowing
+# 3. DONE - Delegation Grant with Scope-Narrowing
 
 ## What it does
 
